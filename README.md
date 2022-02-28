@@ -21,12 +21,22 @@
     -   npm install
     -   npm run dev
 
--   Avviamo migrazioni
+    -   Avviamo migrazioni
 
 ### STEP 2: Back office
 
--   Sostituiamo HomeContoller ed aggiungiamo Admin/HomeController
+    -   Sostituiamo HomeContoller ed aggiungiamo Admin/HomeController
 
--   Modifichiamo path in RouteServiceProvider.php
+    -   Modifichiamo path in RouteServiceProvider.php
 
--   Raggruppiamo rotte di amministrazione
+    -   Raggruppiamo rotte di amministrazione
+
+### TO-DO
+
+    -   Creiamo il necessario per gestire dei post
+        - Model
+        - Controller
+        - Migration
+        - Seeder
+        - Rotte
+        - Create.blade.php, index.blade.php
