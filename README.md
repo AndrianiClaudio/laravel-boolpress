@@ -23,4 +23,10 @@
 
 -   Avviamo migrazioni
 
-    -   php artisan migrate
+### STEP 2: Back office
+
+-   Sostituiamo HomeContoller ed aggiungiamo Admin/HomeController
+
+-   Modifichiamo path in RouteServiceProvider.php
+
+-   Raggruppiamo rotte di amministrazione
