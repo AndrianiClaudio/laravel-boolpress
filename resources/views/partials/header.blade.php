@@ -14,10 +14,11 @@
               @if(Auth::User())
               <!-- Left Side Of Navbar -->
               <ul class="navbar-nav mr-auto">
-                  {{-- POSTS --}}
+                {{-- POSTS --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.posts.index') }}">Post</a>
+                      <a class="nav-link" href="{{ route('admin.posts.index') }}">Post</a>
                 </li>
+
               </ul>
               @endif()
 
@@ -43,6 +44,11 @@
                         </a>
                         
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            {{-- USER INFOS --}}
+                            <a class="dropdown-item" href="{{ route('admin.user_infos.index') }}">Info</a>
+
+                            <div class="dropdown-divider"></div>
+                            
                             {{-- LOGOUT --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

@@ -31,5 +31,5 @@ Route::middleware('auth')
         // POSTS
         Route::resource('posts', 'PostController');
         // USER INFO
-        Route::resource('user_infos', 'UserInfoController');
+        // Route::resource('user_infos', 'UserInfoController');
     });

@@ -17,6 +17,16 @@ class CreateUserInfosTable extends Migration
             $table->id();
 
             // Colonne tabella
+            $table->string('phone');
+            $table->string('address');
+
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+            // $table->foreignId('user_id')
+            //     ->constrained();
 
             $table->timestamps();
         });
