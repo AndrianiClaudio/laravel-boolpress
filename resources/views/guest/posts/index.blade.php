@@ -13,7 +13,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
-                <th scope="col">Actions</th>
+                <th scope="col" colspan="3">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,31 +22,37 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->created_at }}</td>
                     <td>{{ $post->updated_at }}</td>
-                    @if ($post->user_id === Auth::id())
-                    <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
+
+                    @php
+                    $check = 'disabled';
+                    if ($post->user_id === Auth::id()) {
+                      $check = '';
+                    }
+                    @endphp
+                    
+                    <td>
+                      <a class="btn btn-primary" href="@if($check === ''){{ route('admin.posts.show', $post->slug) }}@else {{route('guest.posts.show',$post->slug)}}@endif">View</a>
                     </td>
-                    @else
-                    
-                    <td></td>
-                    <td></td>
-                    
-                    <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
+
+                    <td>
+                      <a class="btn btn-info {{$check}}" href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
                     </td>
-                    
-                    @endif
-                    {{-- {{dd(Auth::check())}} --}}
-                    @if ($post->user_id === Auth::id())
-                      <td><a class="btn btn-info" href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
-                      </td>
-                      <td>
+                    <td>
+                      @if($check === 'disabled')
+                      <fieldset disabled>
+                      @else
+                      @endif
                         <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
                           @csrf
                           @method('DELETE')
                           <input class="btn btn-danger" type="submit" value="Delete">
                         </form>
-                        
-                      </td>
-                    @endif
+                      
+                      @if($check === 'disabled')
+                      </fieldset>
+                      @endif
+
+                    </td> 
                 </tr>
             @endforeach
 

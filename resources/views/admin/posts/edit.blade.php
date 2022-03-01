@@ -35,8 +35,10 @@
 
           <input class="btn btn-primary" type="submit" value="Salva">
       </form>
+      <div class="row">
+        <a class='nav-link' href="{{route('admin.posts.show',$post->slug)}}">Show detail post</a>
+      </div>
     </div>
-    
   </div>
 </div>
 @endsection

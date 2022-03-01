@@ -3,7 +3,7 @@
    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
       <div class="container">
           {{-- LOGO --}}
-          <a class="navbar-brand" href="{{route('admin.home')}}">
+          <a class="navbar-brand" href="{{route('guest.home')}}">
             Boolpress
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -15,7 +15,7 @@
               <ul class="navbar-nav mr-auto">
                 {{-- POSTS --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.posts.all') }}">Post</a>
+                    <a class="nav-link" href="{{ route('guest.posts.index') }}">Post</a>
                 </li>
 
               </ul>

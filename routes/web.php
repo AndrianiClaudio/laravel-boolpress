@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
     return view('guest.home');
-})->name('guest.index');
+})->name('guest.home');
 
-Route::get('/posts', 'Admin\PostController@all')->name('guest.posts.all');
-Route::get('/posts/edit', 'Admin\PostController@guestShow')->name('guest.posts.shw');
 
-// to-do
-/**
- * CREARE GUEST/HOMECONTROLLER
- */
-
+// Route::resource('posts', 'Guest\PostController');
+Route::get('/posts', 'Guest\PostController@index')->name('guest.posts.index');
+Route::get('/posts/{post}', 'Guest\PostController@show')->name('guest.posts.show');
 
 Auth::routes();
 
@@ -42,3 +38,5 @@ Route::middleware('auth')
         // USER INFO
         // Route::resource('user_infos', 'UserInfoController');
     });
+
+

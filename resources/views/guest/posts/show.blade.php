@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -18,8 +18,6 @@
         <div class="card-body">
           <p><b>Content: </b>{{$post->content}}</p>
           <b>Created: {{$post->created_at}}</b>
-          <hr>
-          <a class='nav-link' href="{{route('admin.posts.edit',$post->slug)}}">Edit this post</a>
         </div>
       </div>
     </div>
