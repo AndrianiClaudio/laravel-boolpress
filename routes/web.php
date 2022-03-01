@@ -30,4 +30,6 @@ Route::middleware('auth')
             ->name('home');
         // POSTS
         Route::resource('posts', 'PostController');
+        // USER INFO
+        Route::resource('user_infos', 'UserInfoController');
     });
