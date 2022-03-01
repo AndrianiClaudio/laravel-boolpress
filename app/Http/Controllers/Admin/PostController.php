@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Model\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -17,7 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(5);
+        // $posts = Post::paginate(5);
+        $posts = Post::where('user_id', '=', Auth::id())->get();
+
+        // dd($posts);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -55,6 +59,7 @@ class PostController extends Controller
 
         $newPost->fill($data);
         $newPost->slug = $slug;
+        $newPost->user_id = Auth::id();
         $newPost->save();
 
         // dd($newPost);
