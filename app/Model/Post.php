@@ -10,6 +10,7 @@ class Post extends Model
         'title',
         'content',
         'slug',
+        'user_id',
         'created_at',
         'updated_at'
     ];
@@ -18,5 +19,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

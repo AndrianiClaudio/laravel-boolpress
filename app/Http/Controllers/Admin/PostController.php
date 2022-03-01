@@ -57,13 +57,13 @@ class PostController extends Controller
 
         $newPost = new Post();
 
+        $newPost->user_id = Auth::id();
         $newPost->fill($data);
         $newPost->slug = $slug;
-        $newPost->user_id = Auth::id();
         $newPost->save();
 
         // dd($newPost);
-        return redirect()->route('admin.posts.show', ['post' => $newPost]);
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**
@@ -75,7 +75,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // dd('Post show', $post);
-        return view('admin.posts.show',compact('post'));
+        return view('admin.posts.show',['post' => $post->toArray()]);
     }
 
     /**
@@ -84,9 +84,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        dd($post);
     }
 
     /**
@@ -107,8 +107,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('status', "Post id $post->id deleted");
     }
 }
