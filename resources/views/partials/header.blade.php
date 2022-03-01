@@ -44,11 +44,6 @@
                         </a>
                         
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            {{-- USER INFOS --}}
-                            <a class="dropdown-item" href="{{ route('admin.user_infos.index') }}">Info</a>
-
-                            <div class="dropdown-divider"></div>
-                            
                             {{-- LOGOUT --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

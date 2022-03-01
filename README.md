@@ -31,7 +31,7 @@
 
     -   Raggruppiamo rotte di amministrazione
 
-### TO-DO
+### STEP 3
 
     -   Creiamo il necessario per gestire dei post
         - Model
@@ -40,3 +40,9 @@
         - Seeder
         - Rotte
         - Create.blade.php, index.blade.php
+
+### STEP 4
+
+    -   Creiamo UserInfo: Migration,Model,Seeder
+    -   Creiamo 1 to 1 tra users ed user_infos
+    -   Creiamo 1 to Many tra users e posts
