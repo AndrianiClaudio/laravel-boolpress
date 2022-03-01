@@ -5,9 +5,12 @@
   {{-- ti trovi in index.blade.php --}}
   <div class="row">
     @if (session('status'))
+    <div class="col-12">
+
         <div class="alert alert-danger">
             {{ session('status') }}
         </div>
+    </div>
     @endif
     <div class="col">
         <div class="container">

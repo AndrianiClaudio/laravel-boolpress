@@ -112,7 +112,7 @@ class PostController extends Controller
         $post->update($validateData);
         // dd($post);
         // dd($newPost);
-        return redirect()->route('admin.posts.show', $post->slug);
+        return redirect()->route('admin.posts.show', $post->slug)->with('status', "Post $post->title updated");;
     }
 
     /**
@@ -125,6 +125,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with('status', "Post id $post->id deleted");
+        return redirect()->route('admin.posts.index')->with('status', "Post $post->title deleted");
     }
 }
