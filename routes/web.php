@@ -17,6 +17,15 @@ Route::get('/', function() {
     return view('guest.home');
 })->name('guest.index');
 
+Route::get('/posts', 'Admin\PostController@all')->name('guest.posts.all');
+Route::get('/posts/edit', 'Admin\PostController@guestShow')->name('guest.posts.shw');
+
+// to-do
+/**
+ * CREARE GUEST/HOMECONTROLLER
+ */
+
+
 Auth::routes();
 
 Route::middleware('auth')

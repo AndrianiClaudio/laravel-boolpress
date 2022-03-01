@@ -127,4 +127,15 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.index')->with('status', "Post $post->title deleted");
     }
+    public function all()
+    {
+        $posts = Post::paginate(10);
+        // dd($post);
+        return view('guest.posts.all',compact('posts'));
+    }
+    public function guestShow()
+    {
+        // dd('guestShow');
+    }
+
 }
