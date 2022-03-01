@@ -1,6 +1,6 @@
 <header class='header'>
   {{-- header -> header.blade.php --}}
-   <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+   <nav class="navbar navbar-expand-md @guest navbar-light bg-light @else navbar-dark bg-primary @endguest shadow-sm">
       <div class="container">
           {{-- LOGO --}}
           <a class="navbar-brand" href="{{route('guest.home')}}">

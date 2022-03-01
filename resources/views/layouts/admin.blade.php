@@ -27,6 +27,7 @@
         <main class="py-4">
             <div class="container-fluid">
                 <div class="row">
+
                     @include('partials.main.leftBar')
                     <div class="col">
                         @yield('content')
