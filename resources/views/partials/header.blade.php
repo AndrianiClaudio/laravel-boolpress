@@ -11,16 +11,16 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              @if(Auth::User())
+              {{-- @if(Auth::User()) --}}
               <!-- Left Side Of Navbar -->
-              <ul class="navbar-nav mr-auto">
+              {{-- <ul class="navbar-nav mr-auto"> --}}
                 {{-- POSTS --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                       <a class="nav-link" href="{{ route('admin.posts.index') }}">Post</a>
                 </li>
 
               </ul>
-              @endif()
+              @endif() --}}
 
               <!-- Right Side Of Navbar -->
               <ul class="navbar-nav ml-auto">

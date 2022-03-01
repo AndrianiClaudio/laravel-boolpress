@@ -48,7 +48,6 @@
                         </div>
                     </nav>
                     <div class="col">
-
                         @yield('content')
                     </div>
                 </div>

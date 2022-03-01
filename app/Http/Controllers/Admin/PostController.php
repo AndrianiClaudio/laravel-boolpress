@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         // $posts = Post::paginate(5);
-        $posts = Post::where('user_id', '=', Auth::id())->get();
+        $posts = Post::orderBy('updated_at','desc')->where('user_id', '=', Auth::id())->paginate(10);
 
         // dd($posts);
         return view('admin.posts.index', compact('posts'));
@@ -55,6 +55,13 @@ class PostController extends Controller
             $counter++;
         }
 
+        
+        $validate = $request->validate(
+            [
+                'title' => 'required|max:255',
+                'content' => 'required'
+                ]
+            );
         $newPost = new Post();
 
         $newPost->user_id = Auth::id();
@@ -63,7 +70,7 @@ class PostController extends Controller
         $newPost->save();
 
         // dd($newPost);
-        return redirect()->route('admin.posts.show', $post->slug);
+        return redirect()->route('admin.posts.show', $newPost->slug);
     }
 
     /**
@@ -75,7 +82,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // dd('Post show', $post);
-        return view('admin.posts.show',['post' => $post->toArray()]);
+        return view('admin.posts.show',['post' => $post]);
     }
 
     /**
@@ -86,7 +93,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        dd($post);
+        // dd($post->toArray());
+        return view('admin.posts.edit',['post' => $post]);
     }
 
     /**
@@ -96,9 +104,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // dd($request->all());
+        $validateData = $request->all();
+
+        $post->update($validateData);
+        // dd($post);
+        // dd($newPost);
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**

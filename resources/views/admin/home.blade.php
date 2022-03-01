@@ -12,23 +12,24 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-title">
+                    <div class="card-title ml-4 my-2 text-primary">
                         <h1>
                             Welcome {{ Auth::user()->name }}
                         </h1>
                     </div>
                     <div class="card-body">
-                        <span>
+                        <h3>Your info</h3>
+                        <div>
                             Email :  {{ Auth::user()->email }}
-                        </span>
+                        </div>
                         <hr>
-                        <span>
+                        <div>
                             Phone Number :  {{ Auth::user()->userInfo()->first()->phone }}
-                        </span>
+                        </div>
                         <hr>
-                        <span>
+                        <div>
                             Address :  {{ Auth::user()->userInfo()->first()->address }}
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>

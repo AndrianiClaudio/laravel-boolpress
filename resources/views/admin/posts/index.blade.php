@@ -4,11 +4,19 @@
 <div class="container">
   {{-- ti trovi in index.blade.php --}}
   <div class="row">
-       @if (session('status'))
-          <div class="alert alert-danger">
-              {{ session('status') }}
-          </div>
-        @endif
+    @if (session('status'))
+        <div class="alert alert-danger">
+            {{ session('status') }}
+        </div>
+    @endif
+    <div class="col">
+        <div class="container">
+            <h1>POSTS</h1>
+            <nav class="navbar navbar-inline">
+                <a href="{{route('admin.posts.create')}}" class="nav-link">Create a new Post</a>
+            </nav>
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -44,7 +52,8 @@
 
         </tbody>
     </table>
-  </div>
+    <div class="col">{{$posts->links()}}</div>
+</div>
 
   {{-- <ul> --}}
     {{-- {{dd($posts->toArray())}} --}}
