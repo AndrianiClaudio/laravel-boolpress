@@ -8,6 +8,7 @@ use App\Model\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Model\Category;
 
 class PostController extends Controller
 {
@@ -32,7 +33,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -44,6 +47,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         $slug = Str::slug($data['title'], '-');
         
         $postPresente = Post::where('slug', $slug)->first();
@@ -59,12 +63,13 @@ class PostController extends Controller
         $validate = $request->validate(
             [
                 'title' => 'required|max:255',
-                'content' => 'required'
+                'content' => 'required',
+                'category_id' => 'exists:App\Model\Category,id'
                 ]
             );
         $newPost = new Post();
 
-        $newPost->user_id = Auth::id();
+        // $newPost->user_id = Auth::id();
         $newPost->fill($data);
         $newPost->slug = $slug;
         $newPost->save();

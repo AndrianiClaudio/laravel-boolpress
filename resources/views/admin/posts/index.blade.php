@@ -12,14 +12,13 @@
         </div>
     </div>
     @endif
-    <div class="col">
-        <div class="container">
-            <h1>POSTS</h1>
-            <nav class="navbar navbar-inline">
-                <a href="{{route('admin.posts.create')}}" class="nav-link">Create a new Post</a>
-            </nav>
-        </div>
-    </div>
+    <header>
+        <h1>POSTS</h1>
+        <nav class="navbar navbar-inline">
+            <a href="{{route('admin.posts.create')}}" class="nav-link">Create a new Post</a>
+        </nav>
+    </header>
+    
     <table class="table table-striped">
         <thead>
             <tr>
