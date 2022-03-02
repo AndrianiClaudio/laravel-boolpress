@@ -47,7 +47,15 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
         $data['user_id'] = Auth::user()->id;
+
+        if (Auth::user()->id != $data['user_id']) {
+            abort('404');
+        }
+
+        $data['user_id'] = Auth::user()->id;
+
         $slug = Str::slug($data['title'], '-');
         
         $postPresente = Post::where('slug', $slug)->first();
@@ -116,9 +124,43 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         // dd($request->all());
-        $validateData = $request->all();
+        $data = $request->all();
 
-        $post->update($validateData);
+        if (Auth::user()->id != $post->user_id) {
+            abort('403');
+        }
+
+        $validate = $request->validate(
+            [
+                'title' => 'required|max:255',
+                'content' => 'required',
+                'category_id' => 'exists:App\Model\Category,id'
+                ]);
+
+
+        if ($data['title'] != $post->title) {
+            $post->title = $data['title'];
+            $slug = Str::slug($data['title'], '-');
+        
+            $postPresente = Post::where('slug', $slug)->first();
+
+            $counter = 0;
+            while ($postPresente) {
+                $slug = $slug . '-' . $counter;
+                $postPresente = Post::where('slug', $slug)->first();
+                $counter++;
+            }
+
+            $post->slug = $slug;
+        }
+        if ($data['content'] != $post->content) {
+            $post->content = $data['content'];
+        }
+        if ($data['category_id'] != $post->category_id) {
+            $post->category_id = $data['category_id'];
+        }
+
+        $post->update($data);
         // dd($post);
         // dd($newPost);
         return redirect()->route('admin.posts.show', $post->slug)->with('status', "Post $post->title updated");;

@@ -21,6 +21,8 @@
               <h2>{{$post->title}}</h2>
             </div>
             <div class="card-body">
+              <h3>Category: {{$post->category()->first()->name}}</h3>
+              <h4>Author: {{$post->user()->first()->name}}</h3>
               <p><b>Content: </b>{{$post->content}}</p>
               <b>Created: {{$post->created_at}}</b>
             </div>
