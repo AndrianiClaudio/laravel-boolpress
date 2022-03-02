@@ -11,6 +11,7 @@ class Post extends Model
         'content',
         'slug',
         'user_id',
+        'category_id',
         'created_at',
         'updated_at'
     ];
@@ -19,6 +20,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    public function category()
+    {
+        return $this->belongsTo('App\Model\Category');
     }
 
     public function getRouteKeyName()
