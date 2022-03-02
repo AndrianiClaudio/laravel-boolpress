@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Str;
 
 use App\Model\Post;
 use App\Http\Controllers\Controller;
@@ -22,7 +21,6 @@ class PostController extends Controller
         // $posts = Post::paginate(5);
         $posts = Post::orderBy('updated_at','desc')->where('user_id', '=', Auth::id())->paginate(10);
 
-        // dd($posts);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -47,27 +45,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        $data['user_id'] = Auth::user()->id;
-
-        if (Auth::user()->id != $data['user_id']) {
-            abort('404');
-        }
-
-        $data['user_id'] = Auth::user()->id;
-
-        $slug = Str::slug($data['title'], '-');
         
-        $postPresente = Post::where('slug', $slug)->first();
-
-        $counter = 0;
-        while ($postPresente) {
-            $slug = $slug . '-' . $counter;
-            $postPresente = Post::where('slug', $slug)->first();
-            $counter++;
-        }
-
-        
+        // VALIDATE
         $validate = $request->validate(
             [
                 'title' => 'required|max:255',
@@ -75,11 +54,13 @@ class PostController extends Controller
                 'category_id' => 'exists:App\Model\Category,id'
                 ]
             );
-        $newPost = new Post();
 
-        // $newPost->user_id = Auth::id();
+
+        // CREATE NEW POST
+        $newPost = new Post();
         $newPost->fill($data);
-        $newPost->slug = $slug;
+        $newPost->user_id = Auth::id();
+        $newPost->slug = $newPost->createSlug($data['title']);
         $newPost->save();
 
         // dd($newPost);
@@ -123,12 +104,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        // dd($request->all());
         $data = $request->all();
 
-        if (Auth::user()->id != $post->user_id) {
-            abort('403');
-        }
+        // if (Auth::user()->id != $post->user_id) {
+        //     abort('403');
+        // }
 
         $validate = $request->validate(
             [
@@ -138,34 +118,39 @@ class PostController extends Controller
                 ]);
 
 
+        $changes = [false, false, false];
+        // CHECK & UPDATE IF WE HAVE ANY CHANGE
         if ($data['title'] != $post->title) {
             $post->title = $data['title'];
-            $slug = Str::slug($data['title'], '-');
-        
-            $postPresente = Post::where('slug', $slug)->first();
-
-            $counter = 0;
-            while ($postPresente) {
-                $slug = $slug . '-' . $counter;
-                $postPresente = Post::where('slug', $slug)->first();
-                $counter++;
-            }
-
-            $post->slug = $slug;
+            $post->slug = $post->createSlug($data['title']);
+            $changes[0] = true;
         }
         if ($data['content'] != $post->content) {
             $post->content = $data['content'];
+            $changes[1] = true;
         }
         if ($data['category_id'] != $post->category_id) {
             $post->category_id = $data['category_id'];
+            $changes[2] = true;
         }
 
         $post->update($data);
-        // dd($post);
-        // dd($newPost);
-        return redirect()->route('admin.posts.show', $post->slug)->with('status', "Post $post->title updated");;
-    }
 
+        // CHANGE MESSAGES IF DATA CHANGES OR NOT
+        $messages = [
+            "Post $post->title updated with 0 changes",
+            "Post $post->title updated"
+        ];
+        if(array_search(true,$changes)  === false){
+            $i_messages = 0;
+        } else {
+            $i_messages = 1;
+        }
+
+        return redirect()
+            ->route('admin.posts.show', $post->slug)
+            ->with('status', $messages[$i_messages]);
+    }
     /**
      * Remove the specified resource from storage.
      *

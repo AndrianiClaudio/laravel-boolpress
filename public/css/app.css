@@ -10962,3 +10962,7 @@ a.text-dark:focus {
   }
 }
 
+main {
+  overflow: auto;
+}
+
