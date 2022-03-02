@@ -21,6 +21,7 @@
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 {{-- <th colspan="3" scope="col">Actions</th> --}}
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +31,7 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->created_at }}</td>
                     <td>{{ $category->updated_at }}</td>
-                    {{-- <td><a class="btn btn-primary" href="{{ route('admin.categories.show', $category->slug) }}">View</a> --}}
+                    <td><a class="btn btn-primary" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
                     </td>
                 </tr>
             @endforeach
