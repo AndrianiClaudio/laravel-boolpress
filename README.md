@@ -46,3 +46,12 @@
     -   Creiamo UserInfo: Migration,Model,Seeder
     -   Creiamo 1 to 1 tra users ed user_infos
     -   Creiamo 1 to Many tra users e posts
+
+### 02 Marzo - STEP 5
+
+    -   Aggiungete model, migration, seeder di Category
+    -   Aggiungete relazione one to many con Post
+    -   Modificate create ed edit per inserire le select con le categorie
+
+    -   abbellite il vostro lavoro con sass
+        - Prendete spunto da https://themes.getbootstrap.com/
