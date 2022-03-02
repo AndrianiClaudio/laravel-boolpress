@@ -35,6 +35,27 @@
                   <td>{{ $post->updated_at }}</td>
                   <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
                   </td>
+                  <td>
+                    <a 
+                    class="btn btn-info 
+                      @if(Auth::user()->id !== $post->user_id) 
+                        disabled
+                      @endif"
+                    href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
+                  </td>
+                  <td>
+                    <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <input 
+                      class="btn btn-danger" type="submit" value="Delete"
+                      @if(Auth::user()->id !== $post->user_id) 
+                      disabled
+                    @endif>
+                    </form>
+                  </td>
+                  {{-- @if(Auth::user()->id === $post->user_id)
+                  @endif --}}
                 </tr>
               @endforeach
             </tbody>
