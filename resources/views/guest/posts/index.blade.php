@@ -11,6 +11,8 @@
         <thead>
             <tr>
                 <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Category</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 <th scope="col" colspan="3">Actions</th>
@@ -20,6 +22,9 @@
             @foreach ($posts as $post)
                 <tr>
                     <td>{{ $post->title }}</td>
+                    {{-- <td>{{ $post->category_id }}</td> --}}
+                    <td>{{ $post->user()->first()->name }}</td>
+                    <td>{{ $post->category()->first()->name }}</td>
                     <td>{{ $post->created_at }}</td>
                     <td>{{ $post->updated_at }}</td>
 
