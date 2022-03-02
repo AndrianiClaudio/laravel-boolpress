@@ -15,7 +15,7 @@
               <ul class="navbar-nav mr-auto">
                 {{-- POSTS --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.posts.index') }}">Post</a>
+                    <a class="nav-link" href="{{ route('guest.posts.index') }}">All Post</a>
                 </li>
 
               </ul>

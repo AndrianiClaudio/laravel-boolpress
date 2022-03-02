@@ -16,6 +16,13 @@
                     Posts
                 </a>
             </li>
+            {{-- CATEGORIES --}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.categories.index')}}">
+                    <i class="bi bi-files"></i>
+                    Categories
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
