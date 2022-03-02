@@ -26,6 +26,11 @@
                     </option>
                 @endforeach
             </select>
+            @error('category_id')
+                <div class="alert alert-danger mt-3">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
           {{-- TITLE --}}

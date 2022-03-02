@@ -98,8 +98,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $categories = Category::all();
         // dd($post->toArray());
-        return view('admin.posts.edit',['post' => $post]);
+        return view('admin.posts.edit',[
+            'post' => $post,
+            'categories' => $categories,
+        ]);
     }
 
     /**

@@ -55,3 +55,9 @@
 
     -   abbellite il vostro lavoro con sass
         - Prendete spunto da https://themes.getbootstrap.com/
+
+### TO DO
+
+    -   Autenticazione su tutti i fronti(controllare bene validazione)
+        -   Validate in edit
+    -   Controllo aggiornamento slug in edit
