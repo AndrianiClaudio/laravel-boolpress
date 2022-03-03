@@ -32,7 +32,7 @@ class Post extends Model
         return 'slug';
     }
 
-    public function createSlug($title)
+    public static function createSlug($title)
     {
         $slug = Str::slug($title, '-');
 

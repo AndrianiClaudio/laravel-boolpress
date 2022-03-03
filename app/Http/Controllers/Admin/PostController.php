@@ -60,7 +60,7 @@ class PostController extends Controller
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
-        $newPost->slug = $newPost->createSlug($data['title']);
+        $newPost->slug = Post::createSlug($data['title']);
         $newPost->save();
 
         // dd($newPost);
@@ -122,7 +122,7 @@ class PostController extends Controller
         // CHECK & UPDATE IF WE HAVE ANY CHANGE
         if ($data['title'] != $post->title) {
             $post->title = $data['title'];
-            $post->slug = $post->createSlug($data['title']);
+            $post->slug = Post::createSlug($data['title']);
             $changes[0] = true;
         }
         if ($data['content'] != $post->content) {

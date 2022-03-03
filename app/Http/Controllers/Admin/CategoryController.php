@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Post;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('name','asc')->get();
         return view('admin.categories.index',compact('categories'));
     }
 
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        dd('in Category create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -38,7 +39,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd('in Category store');
+        $newCategory = new Category;
+
+        $data = $request->all();
+        // dd($request->all());
+        $validate = $request->validate([
+            'name' => 'required | max:240'
+        ]);
+
+        $newCategory->fill($data);
+        $newCategory->slug = Post::createSlug($newCategory->name);
+
+        $newCategory->save();
+
+        return redirect()
+            ->route('admin.categories.show', $newCategory->slug)
+            ->with('status', 'ategory' . $newCategory->name . 'created.');
     }
 
     /**
@@ -89,5 +105,7 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('admin.categories.index')->with('status', "Category $category->name deleted");
+
+        // category->update ->setGeneric
     }
 }
