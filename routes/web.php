@@ -18,7 +18,6 @@ Route::get('/', function() {
 })->name('guest.home');
 
 
-// Route::resource('posts', 'Guest\PostController');
 Route::get('/posts', 'Guest\PostController@index')->name('guest.posts.index');
 Route::get('/posts/{post}', 'Guest\PostController@show')->name('guest.posts.show');
 
@@ -37,8 +36,6 @@ Route::middleware('auth')
         Route::resource('posts', 'PostController');
         // CATEGORY
         Route::resource('categories', 'CategoryController');
-        // USER INFO
-        // Route::resource('user_infos', 'UserInfoController');
     });
 
 

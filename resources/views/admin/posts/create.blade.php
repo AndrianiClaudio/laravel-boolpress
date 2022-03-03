@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col card p-3">
         <h2>Create a new Post</h2>
-      <form action="{{ route('admin.posts.store') }}" method="POST">
+      <form action="{{ route('admin.categories.store') }}" method="POST">
           @csrf
           @method('POST')
         {{-- CATEGORY SELECT --}}

@@ -21,3 +21,8 @@
     -   Relazione 1aN tra post e category
     -   CategoryController (index+show)
     -   Fix delle CRUD di post (tutte!) in modo da aggiungere la categoria
+
+## TO-DO
+
+    -   Aggiungete alla cancellazione di una category la cancellazione a cascata tutti i post associati oppure a tutti i post associati colleghiamo una category “generic” (attualmente alla cancellazione di una catgoria vengono cancellati tutti i post)
+    -   Grafica

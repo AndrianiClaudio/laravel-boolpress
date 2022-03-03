@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        dd('in Category create');
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('in Category store');
     }
 
     /**
@@ -83,8 +83,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        // dd($category);
+        $category->delete();
+
+        return redirect()->route('admin.categories.index')->with('status', "Category $category->name deleted");
     }
 }
