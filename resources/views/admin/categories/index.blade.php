@@ -36,7 +36,10 @@
                     <td><a class="btn btn-primary" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
                     </td>
                     {{-- EDIT --}}
-                    <td><a class="btn btn-info" href="{{ route('admin.categories.edit', $category->slug) }}">Edit</a>
+                    <td><a class="btn btn-info
+                        @if($category->slug === 'generic')
+                            disabled
+                        @endif" href="{{ route('admin.categories.edit', $category->slug) }}">Edit</a>
                     </td>
                     {{-- DELETE --}}
                     <td>
@@ -44,7 +47,7 @@
                           @csrf
                           @method('DELETE')
                           <input class="btn btn-danger" type="submit" value="Delete" 
-                          @if($category->slug === 'generic-0')
+                          @if($category->slug === 'generic')
                             disabled
                           @endif>
                         </form>

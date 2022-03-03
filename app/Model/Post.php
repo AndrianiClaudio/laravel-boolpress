@@ -35,7 +35,6 @@ class Post extends Model
     public static function createSlug($title)
     {
         $slug = Str::slug($title, '-');
-
         $oldPost = Post::where('slug', $slug)->first();
 
         $counter = 0;

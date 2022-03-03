@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
     {
         $newCategory = new Category();
         $newCategory->name = 'generic';
-        $newCategory->slug = 'generic-0';
+        $newCategory->slug = 'generic';
         $newCategory->save();
 
         for ($i = 0; $i < 10; $i++) {

@@ -116,11 +116,18 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // dd($category);
+        $generic_id = Category::where('name', 'generic')->first()->id;
+        $post_change_id = Post::where('category_id', $category->id)->get();
+// dd($generic_id, $post_change_id);
         $category->delete();
+        // dd($post_change_id);
+        foreach($post_change_id as $post) {
+            // dd($post['category_id'], $generic_id);
+            $post->category_id = $generic_id;
+            $post->save(['category_id']);
+        }
+
 
         return redirect()->route('admin.categories.index')->with('status', "Category $category->name deleted");
-
-        // category->update ->setGeneric
     }
 }
