@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
+
 use App\Model\Category;
 use App\Model\Post;
 
@@ -40,32 +40,30 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $newCategory = new Category;
-
         $data = $request->all();
-        // dd($request->all());
+
+        // VALIDAZIONE
         $validate = $request->validate([
             'name' => 'required | max:240'
         ]);
 
         $newCategory->fill($data);
         $newCategory->slug = Post::createSlug($newCategory->name);
-
         $newCategory->save();
 
         return redirect()
             ->route('admin.categories.show', $newCategory->slug)
-            ->with('status', 'ategory' . $newCategory->name . 'created.');
+            ->with('status', 'Category ' . $newCategory->name . ' created.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
-        // dd($category);
         return view('admin.categories.show', compact('category'));
         
     }
@@ -73,7 +71,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -86,7 +84,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -111,22 +109,18 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
         $generic_id = Category::where('name', 'generic')->first()->id;
         $post_change_id = Post::where('category_id', $category->id)->get();
-// dd($generic_id, $post_change_id);
         $category->delete();
-        // dd($post_change_id);
         foreach($post_change_id as $post) {
-            // dd($post['category_id'], $generic_id);
             $post->category_id = $generic_id;
             $post->save(['category_id']);
         }
-
 
         return redirect()->route('admin.categories.index')->with('status', "Category $category->name deleted");
     }

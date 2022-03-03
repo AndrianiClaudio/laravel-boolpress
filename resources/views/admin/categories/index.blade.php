@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-  {{-- ti trovi in index.blade.php --}}
   <div class="row">
+    {{-- REDIRECT STATUS MESSAGE --}}
     @if (session('status'))
     <div class="col-12">
         <div class="alert alert-danger">
@@ -11,13 +11,17 @@
         </div>
     </div>
     @endif
+    {{-- FINE REDIRECT STATUS MESSAGE --}}
     <header>
         <h1>CATEGORIES</h1>
+        {{-- NEW CREATE --}}
         <nav class="navbar navbar-inline">
             <a href="{{route('admin.categories.create')}}" class="nav-link">Create a new Category</a>
         </nav>
     </header>
+    {{-- DATI CATEGORIES --}}
     <table class="table table-striped">
+        {{-- TABLE HEADER --}}
         <thead>
             <tr>
                 <th scope="col">Name</th>
@@ -26,6 +30,7 @@
                 <th scope="col" colspan="3">Actions</th>
             </tr>
         </thead>
+        {{-- TABLE BODY --}}
         <tbody>
             @foreach ($categories as $category)
                 <tr>
@@ -56,5 +61,7 @@
             @endforeach
         </tbody>
     </table>
+    {{-- FINE DATI CATEGORIES --}}
+
 </div>
 @endsection

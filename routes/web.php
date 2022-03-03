@@ -34,7 +34,7 @@ Route::middleware('auth')
             ->name('home');
         // POSTS
         Route::resource('posts', 'PostController');
-        // CATEGORY
+        // CATEGORIES
         Route::resource('categories', 'CategoryController');
     });
 

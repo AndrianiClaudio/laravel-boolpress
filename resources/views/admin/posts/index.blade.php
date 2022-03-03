@@ -2,14 +2,15 @@
 
 @section('content')
 <div class="container">
-  {{-- ti trovi in index.blade.php --}}
   <div class="row">
+    {{-- MESSAGGIO REDIRECT STATUS --}}
     @if (session('status'))
     <div class="col-12">
       <div class="alert alert-danger">
         {{ session('status') }}
       </div>
     </div>
+    {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     @endif
     <header>
       <h1>POSTS</h1>
@@ -18,7 +19,9 @@
       </nav>
     </header>
     
+    {{-- STAMPA DATI POST --}}
     <table class="table table-striped">
+      {{-- TABLE HEAD --}}
       <thead>
           <tr>
               <th scope="col">Title</th>
@@ -29,6 +32,7 @@
               <th colspan="3" scope="col">Actions</th>
           </tr>
       </thead>
+      {{-- TABLE BODY --}}
       <tbody>
           @foreach ($posts as $post)
             <tr>
@@ -56,6 +60,7 @@
         </tbody>
     </table>
     <div class="col">{{$posts->links()}}</div>
+    {{-- FINESTAMPA DATI POST --}}
   </div>
 </div>
 @endsection

@@ -11,8 +11,7 @@
       <form action="{{ route('admin.categories.store') }}" method="POST">
           @csrf
           @method('POST')
-        {{-- CATEGORY SELECT --}}
-        
+        {{-- NEW CATEGORY SELECT --}}
         <div class="mb-3">
             <select class="form-select" name='category_id'>
                 <option class="" value="">Select a category</option>
@@ -33,7 +32,7 @@
             @enderror
         </div>
 
-          {{-- TITLE --}}
+          {{-- NEW POST TITLE --}}
           <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
@@ -44,7 +43,7 @@
               @enderror
           </div>
 
-          {{-- CONTENT --}}
+          {{-- NEW POST CONTENT --}}
           <div class="mb-3">
               <label for="content" class="form-label">Content</label>
               <textarea class="form-control" id="content" rows="3"

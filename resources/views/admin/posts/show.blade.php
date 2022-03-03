@@ -2,14 +2,16 @@
 
 @section('content')
     <div class="container">
+      {{-- MESSAGGIO REDIRECT STATUS --}}
       @if (session('status'))
       <div class="col">
         <div class="row">
           <div class="alert alert-success">
-              {{ session('status') }}
+            {{ session('status') }}
           </div>
         </div>
       </div>
+      {{-- FINE MESSAGGIO REDIRECT STATUS --}}
       @endif
       <div class="card">
         <div class="card-title ml-4">

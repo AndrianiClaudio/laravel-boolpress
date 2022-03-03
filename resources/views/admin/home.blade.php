@@ -2,13 +2,15 @@
 
 @section('content')
     <div class="container">
+        {{-- MESSAGGIO REDIRECT STATUS --}}
         <div class="row">
             @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
             @endif
         </div>
+        {{-- FINE MESSAGGIO REDIRECT STATUS --}}
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -17,6 +19,7 @@
                             Welcome {{ Auth::user()->name }}
                         </h1>
                     </div>
+                    {{-- USER INFO --}}
                     <div class="card-body">
                         <h3>Your info</h3>
                         <div>

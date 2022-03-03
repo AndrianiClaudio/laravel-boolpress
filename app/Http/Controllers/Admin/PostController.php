@@ -18,9 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::paginate(5);
         $posts = Post::orderBy('updated_at','desc')->where('user_id', '=', Auth::id())->paginate(10);
-
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -63,32 +61,29 @@ class PostController extends Controller
         $newPost->slug = Post::createSlug($data['title']);
         $newPost->save();
 
-        // dd($newPost);
         return redirect()->route('admin.posts.show', $newPost->slug);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
     {
-        // dd('Post show', $post);
         return view('admin.posts.show',['post' => $post]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
     {
         $categories = Category::all();
-        // dd($post->toArray());
         return view('admin.posts.edit',[
             'post' => $post,
             'categories' => $categories,
@@ -99,7 +94,7 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
@@ -112,7 +107,6 @@ class PostController extends Controller
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id'
                 ]);
-
 
         $changes = [false, false, false];
         // CHECK & UPDATE IF WE HAVE ANY CHANGE
@@ -150,7 +144,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
