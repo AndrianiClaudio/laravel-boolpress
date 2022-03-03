@@ -43,6 +43,7 @@
                       @endif"
                     href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
                   </td>
+                  
                   <td>
                     <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
                       @csrf
@@ -54,8 +55,6 @@
                     @endif>
                     </form>
                   </td>
-                  {{-- @if(Auth::user()->id === $post->user_id)
-                  @endif --}}
                 </tr>
               @endforeach
             </tbody>

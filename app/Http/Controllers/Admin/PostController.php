@@ -106,10 +106,6 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        // if (Auth::user()->id != $post->user_id) {
-        //     abort('403');
-        // }
-
         $validate = $request->validate(
             [
                 'title' => 'required|max:255',

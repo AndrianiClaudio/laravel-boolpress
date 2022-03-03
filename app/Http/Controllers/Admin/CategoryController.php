@@ -76,9 +76,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        // dd($category);
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -88,9 +89,23 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $data = $request->all();
+
+        $validate = $request->validate([
+            'name' => 'required | max:240'
+        ]);
+
+        if($data['name'] != $category->name) {
+            $category->name = $data['name'];
+            $category->slug = Post::createSlug($data['name']);
+        }
+        $category->update($data);
+
+        return redirect()
+            ->route('admin.categories.show', $category->slug)
+            ->with('status', 'category ' . $category->name. ' updated');
     }
 
     /**

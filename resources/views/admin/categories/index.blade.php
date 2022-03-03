@@ -35,6 +35,9 @@
                     {{-- VIEW --}}
                     <td><a class="btn btn-primary" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
                     </td>
+                    {{-- EDIT --}}
+                    <td><a class="btn btn-info" href="{{ route('admin.categories.edit', $category->slug) }}">Edit</a>
+                    </td>
                     {{-- DELETE --}}
                     <td>
                         <form action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">

@@ -40,7 +40,7 @@
               {{-- VIEW --}}
               <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
               </td>
-              {{-- MODIFY --}}
+              {{-- EDIT --}}
               <td><a class="btn btn-info" href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
               </td>
               {{-- DELETE --}}
