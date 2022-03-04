@@ -67,6 +67,9 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
         $newPost->slug = Post::createSlug($data['title'],'post');
+
+
+        // dd($data);
         $newPost->save();
         Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
 

@@ -25,7 +25,7 @@
     </div>
     
     {{-- STAMPA DATI POST --}}
-    <div class="cards">
+    <div class="cards mx-auto">
       @foreach ($posts as $post)
       <div class="card w-75 mx-auto text-center mb-3">
         <div class="card-body">
@@ -39,7 +39,7 @@
                 <b>Tags: </b>
               </div>
               <div class="col-10">
-                <ul class="list-group list-group-horizontal mx-auto">
+                <ul class="list-group list-group-horizontal flex-wrap mx-auto">
                 @foreach ($post->tag()->get() as $tag)
                   <li class="list-group-item border-0">#{{$tag->name}}</li>
                 @endforeach
@@ -68,7 +68,7 @@
       </div>
       @endforeach
     </div>
-    <div class="col">{{$posts->links()}}</div>
+    <div class="col-12">{{$posts->links()}}</div>
     {{-- FINESTAMPA DATI POST --}}
   </div>
 </div>

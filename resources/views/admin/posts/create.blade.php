@@ -44,6 +44,12 @@
                 </label>
             </div>
             @endforeach
+            @if($errors->any())
+                {{dd($errors->any())}}
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @endif
         </div>
 
           {{-- TITLE --}}

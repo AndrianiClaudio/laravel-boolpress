@@ -34,7 +34,7 @@
                   <b>Tags: </b>
                 </div>
                 <div class="col-10">
-                  <ul class="list-group list-group-horizontal mx-auto">
+                  <ul class="list-group list-group-horizontal flex-wrap  mx-auto">
                   @foreach ($post->tag()->get() as $tag)
                     <li class="list-group-item border-0">#{{$tag->name}}</li>
                   @endforeach
