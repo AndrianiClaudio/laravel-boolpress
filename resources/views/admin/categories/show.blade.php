@@ -28,7 +28,6 @@
             <h4>Author: {{$post->user()->first()->name}}</h3>
             <p><b>Content: </b>{{$post->content}}</p>
             @if(count($post->tag()->get()) > 0)
-            {{-- <p class="card-text"> --}}
               <div class="row align-items-center">
                 <div class="col-2">
                   <b>Tags: </b>
@@ -41,8 +40,6 @@
                   </ul>
                 </div>
               </div>
-
-            {{-- </p> --}}
             @endif
             <b>Created: {{$post->created_at}}</b><br>
             <b>Last update: {{$post->updated_at}}</b>

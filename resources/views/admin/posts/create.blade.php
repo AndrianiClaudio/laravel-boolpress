@@ -38,7 +38,7 @@
         $oldTags = [];
         foreach (session()->getOldInput() as $key => $value) {
             if(str_starts_with($key,'tag_id')) {
-                $oldTags[] = $value;
+                $oldTags[] = $value - 1;
             }
         }    
         @endphp
@@ -56,13 +56,6 @@
                 </label>
             </div>
             @endforeach
-            {{-- @if($errors->any())
-
-                {{dd($tags)}}
-                <div class="alert alert-danger">
-                    {{ $message }}
-                </div>
-            @endif --}}
         </div>
 
           {{-- TITLE --}}

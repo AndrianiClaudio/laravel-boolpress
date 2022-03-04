@@ -25,7 +25,7 @@
     </div>
     
     {{-- STAMPA DATI POST --}}
-    <div class="cards mx-auto">
+    <div class="cards w-100 mx-auto">
       @foreach ($posts as $post)
       <div class="card w-75 mx-auto text-center mb-3">
         <div class="card-body">
@@ -33,7 +33,6 @@
           <h5 class="card-subtitle mb-2 text-muted"><b>Author: </b>{{$post->user()->first()->name}}</h5>
           <p class="card-text">{{$post->content}}</p>
           @if(count($post->tag()->get()) > 0)
-          {{-- <p class="card-text"> --}}
             <div class="row align-items-center">
               <div class="col-2">
                 <b>Tags: </b>
@@ -46,8 +45,6 @@
                 </ul>
               </div>
             </div>
-
-          {{-- </p> --}}
           @endif
           <h6 class="card-text text-info"><b>Category: </b>{{$post->category()->first()->name}}</h6>
           <div class="row justify-content-center ">

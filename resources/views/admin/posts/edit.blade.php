@@ -12,10 +12,9 @@
             <div class="mb-3">
                 <label for="category_id" class="form-label">Category</label>
                 <select class="form-select" name="category_id">
-                    identica a quella su cui sto girando inserisco
                     @foreach ($categories as $category)
                         <option @if (old('category_id', $post->category_id) == $category->id) selected @endif value="{{ $category->id }}">
-                            {{ $category->name }}</option>
+                        {{ $category->name }}</option>
                     @endforeach
                 </select>
                 @error('category_id')
@@ -25,6 +24,33 @@
                 @enderror
             </div>
             
+            {{-- TAG SELECT --}}
+            @php
+            $oldTags = [];
+            // dd($post->tag()->get());
+            foreach ($post->tag()->get()->toArray() as $value) {
+                $oldTags[] = $value['pivot']['tag_id'] - 1;
+                // dd($post->tag()->get()[0]);
+                // dd($post->tag()->get()[1]);
+            }
+            // dd($oldTags);
+            @endphp
+            <div class="mb-3">
+                @foreach ($tags as $i => $tag)
+                <div class="form-check-inline">
+                    <input class="form-check-input"
+                    @if (in_array($i,$oldTags))
+                    checked
+                    @endif
+                    type="checkbox" value="{{$tag->id}}" id="flexCheckDefault-{{$i}}" name="tag_id-{{$i}}"
+                    >
+                    <label class="form-check-label" for="flexCheckDefault-{{$i}}">
+                        {{$tag->name}}
+                    </label>
+                </div>
+                @endforeach
+            </div>
+                    
             {{-- EDIT POST TITLE --}}
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

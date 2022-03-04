@@ -102,7 +102,7 @@ class CategoryController extends Controller
         $category->update($data);
 
         return redirect()
-            ->route('admin.categories.show', $category)
+            ->route('admin.categories.show', $category->slug)
             ->with('status', 'category ' . $category->name. ' updated');
     }
 

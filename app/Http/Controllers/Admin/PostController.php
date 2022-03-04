@@ -74,7 +74,7 @@ class PostController extends Controller
         Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
 
 
-        return redirect()->route('admin.posts.index', $newPost)->with('status','Post '.$newPost->title . ' created.');
+        return redirect()->route('admin.posts.index', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
     /**
@@ -96,10 +96,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags = Tag::all();
+        // dd($post->tag(), $tags);
         $categories = Category::all();
         return view('admin.posts.edit',[
             'post' => $post,
             'categories' => $categories,
+            'tags' => $tags
         ]);
     }
 
@@ -136,26 +139,22 @@ class PostController extends Controller
             $post->category_id = $data['category_id'];
             $changes[2] = true;
         }
-
+        
         $post->update($data);
 
-        // CHANGE MESSAGES IF DATA CHANGES OR NOT
-        $messages = [
-            "Post $post->title updated with 0 changes",
-            "Post $post->title updated"
-        ];
-        $status = [
-            'statusError','status'
-        ];
-        if(array_search(true,$changes)  === false){
-            $i_messages = 0;
-        } else {
-            $i_messages = 1;
+        $tags = [];
+        foreach ($data as $key => $value) {
+            if(str_starts_with($key,'tag_id')) {
+                $tags[] = $value;
+            }
         }
+        // $tags = $post->tag()->get();
+        
+        Post::where('slug', $post->slug)->first()->tag()->sync($tags);
 
         return redirect()
             ->route('admin.posts.show', $post->slug)
-            ->with($status[$i_messages], $messages[$i_messages]);
+            ->with('status', 'Post '. $post->title .' updated.');
     }
     /**
      * Remove the specified resource from storage.

@@ -11,19 +11,9 @@
           </div>
         </div>
       </div>
-      {{-- FINE MESSAGGIO REDIRECT STATUS --}}
       @endif
-      {{-- MESSAGGIO REDIRECT STATUS --}}
-      @if (session('statusError'))
-      <div class="col-6 mx-auto">
-        <div class="row">
-          <div class="alert alert-danger mx-auto">
-            {{ session('statusError') }}
-          </div>
-        </div>
-      </div>
       {{-- FINE MESSAGGIO REDIRECT STATUS --}}
-      @endif
+
       <div class="card w-75 mx-auto text-center ">
         <div class="card-title ml-4 mt-2">
           <h2><b>Title: </b>{{$post->title}}</h2>
@@ -32,6 +22,20 @@
           <h3>Category: {{$post->category()->first()->name}}</h3>
           <h4>Author: {{$post->user()->first()->name}}</h3>
           <p><b>Content: </b>{{$post->content}}</p>
+          @if(count($post->tag()->get()) > 0)
+            <div class="row align-items-center">
+              <div class="col-2">
+                <b>Tags: </b>
+              </div>
+              <div class="col-10">
+                <ul class="list-group list-group-horizontal flex-wrap  mx-auto">
+                @foreach ($post->tag()->get() as $tag)
+                  <li class="list-group-item border-0">#{{$tag->name}}</li>
+                @endforeach
+                </ul>
+              </div>
+            </div>
+          @endif
           <b>Created: {{$post->created_at}}</b><br>
           <b>Last update: {{$post->updated_at}}</b>
           @if($post->user_id === Auth::user()->id)
