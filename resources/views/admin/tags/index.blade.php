@@ -23,9 +23,11 @@
             <h4 class="card-title">#{{$tag->name}}</h4>
             <h5 class="card-subtitle mb-2 text-muted"><b>Created: </b>{{$tag->created_at}}</h5>
           </div>
+          {{-- VIEW TAG --}}
+          <div class="col-3 mx-auto">
+            <a class="btn btn-info" href="{{ route('admin.tags.show', $tag->slug) }}">View</a>
+          </div>
         </div>
-        {{-- VIEW TAG --}}
-        {{-- <a class="btn btn-info" href="{{ route('admin.tags.show', $tag->slug) }}">View</a> --}}
         {{-- @if($tag->slug !== 'generic') --}}
             {{-- EDIT TAG --}}
             {{-- <a class="btn btn-info ml-2" href="{{ route('admin.tags.edit', $tag->slug) }}">Modify</a> --}}

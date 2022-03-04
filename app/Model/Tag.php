@@ -13,8 +13,14 @@ class Tag extends Model
         'updated_at'
     ];
 
+    
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function post() {
         return $this->belongsToMany('App\Model\Post');
     }
+
 }
