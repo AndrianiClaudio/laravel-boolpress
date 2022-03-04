@@ -16,7 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::paginate(5);
+        $tags = Tag::orderBy('updated_at','desc')->paginate(5);
         return view('admin.tags.index', compact('tags'));
     }
 
@@ -43,14 +43,26 @@ class TagController extends Controller
             'name' => 'required | alpha_dash | max:240'
         ]);
 
+
+        $tags = Tag::all();
+        $tagNames = [];
+        foreach ($tags as $tag) {
+            $tagNames[] = $tag->name;
+        }
         $data = $request->all();
-        $newTag = new Tag();
-        $newTag->fill($data);
-        $newTag->slug = Post::createSlug($newTag->name,'tag');
-        $newTag->save();
-        // dd($newTag);
-        return redirect()->route('admin.tags.index', Tag::paginate(5))
-        ->with('status','Tag '.$newTag->name . ' created.');
+
+        if(!in_array($data['name'],$tagNames)) {
+            $newTag = new Tag();
+            $newTag->fill($data);
+            $newTag->slug = Post::createSlug($newTag->name,'tag');
+            $newTag->save();
+            // dd($newTag);
+            return redirect()->route('admin.tags.index', Tag::paginate(5))
+            ->with('status','Tag '.$newTag->name . ' created.');
+        } else {
+            return redirect()->route('admin.tags.index', Tag::paginate(5))
+            ->with('statusError','Tag '.$data['name'] . ' already exist.');
+        }
     }
 
     /**
@@ -109,6 +121,9 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->post()->detach();
+        $tag->delete();
+        
+        return redirect()->route('admin.tags.index')->with('statusError', "Category $tag->name deleted");
     }
 }

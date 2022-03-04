@@ -35,4 +35,3 @@
 
     -   Post create: scelta dei tag
     -   Post edit: modifica dei tag
-    -   Tag destroy
