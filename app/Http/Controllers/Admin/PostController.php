@@ -74,7 +74,7 @@ class PostController extends Controller
         Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
 
 
-        return redirect()->route('admin.posts.index', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
+        return redirect()->route('admin.posts.index', $newPost)->with('status','Post '.$newPost->title . ' created.');
     }
 
     /**

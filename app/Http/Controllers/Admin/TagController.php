@@ -122,7 +122,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->post()->detach();
-        $tag->delete();
+        // $tag->delete();
         
         return redirect()->route('admin.tags.index')->with('statusError', "Category $tag->name deleted");
     }

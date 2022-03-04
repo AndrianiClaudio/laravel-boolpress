@@ -34,22 +34,35 @@
         </div>
         
         {{-- TAG SELECT --}}
+        @php
+        $oldTags = [];
+        foreach (session()->getOldInput() as $key => $value) {
+            if(str_starts_with($key,'tag_id')) {
+                $oldTags[] = $value;
+            }
+        }    
+        @endphp
         <div class="mb-3">
             @foreach ($tags as $i => $tag)
             <div class="form-check-inline">
-                <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="flexCheckDefault-{{$i}}" name="tag_id-{{$i}}"
+                <input class="form-check-input"
+                @if (in_array($i,$oldTags))
+                checked
+                @endif
+                type="checkbox" value="{{$tag->id}}" id="flexCheckDefault-{{$i}}" name="tag_id-{{$i}}"
                 >
                 <label class="form-check-label" for="flexCheckDefault-{{$i}}">
                     {{$tag->name}}
                 </label>
             </div>
             @endforeach
-            @if($errors->any())
-                {{dd($errors->any())}}
+            {{-- @if($errors->any())
+
+                {{dd($tags)}}
                 <div class="alert alert-danger">
                     {{ $message }}
                 </div>
-            @endif
+            @endif --}}
         </div>
 
           {{-- TITLE --}}
