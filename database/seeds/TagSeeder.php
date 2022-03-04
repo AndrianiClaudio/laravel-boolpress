@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Model\Tag;
+use App\Model\Post;
 
 class TagSeeder extends Seeder
 {
@@ -11,6 +13,23 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $tags = [
+            'photooftheday',
+            'love',
+            'selfie',
+            'instadaily',
+            'picoftheday',
+            'igers',
+            'instacool',
+            'bestoftheday',
+            'instagood',
+            'followme'
+        ];
+        foreach ($tags as $tag) {
+            $newTag = new Tag();
+            $newTag->name = $tag;
+            $newTag->slug = Post::createSlug($newTag->name);
+            $newTag->save();
+        }
     }
 }
