@@ -30,3 +30,9 @@
         -   (on delete set null)
     -   TagController
     -   CRUD di tag
+
+# TO-DO
+
+    -   Post create: scelta dei tag
+    -   Post edit: modifica dei tag
+    -   Tag destroy

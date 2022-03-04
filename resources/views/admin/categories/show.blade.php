@@ -27,6 +27,23 @@
             <h3>Category: {{$post->category()->first()->name}}</h3>
             <h4>Author: {{$post->user()->first()->name}}</h3>
             <p><b>Content: </b>{{$post->content}}</p>
+            @if(count($post->tag()->get()) > 0)
+            {{-- <p class="card-text"> --}}
+              <div class="row align-items-center">
+                <div class="col-2">
+                  <b>Tags: </b>
+                </div>
+                <div class="col-10">
+                  <ul class="list-group list-group-horizontal mx-auto">
+                  @foreach ($post->tag()->get() as $tag)
+                    <li class="list-group-item border-0">#{{$tag->name}}</li>
+                  @endforeach
+                  </ul>
+                </div>
+              </div>
+
+            {{-- </p> --}}
+            @endif
             <b>Created: {{$post->created_at}}</b><br>
             <b>Last update: {{$post->updated_at}}</b>
             @if(Auth::user()->id === $post->id)

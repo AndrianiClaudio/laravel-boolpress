@@ -47,7 +47,7 @@
                     </div>
                 @enderror
             </div>
-
+            
             <input class="btn btn-primary" type="submit" value="Salva">
         </form>
       <div class="row">

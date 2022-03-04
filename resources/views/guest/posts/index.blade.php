@@ -15,6 +15,23 @@
           <h4 class="card-title">{{$post->title}}</h4>
           <h5 class="card-subtitle mb-2 text-muted"><b>Author: </b>{{$post->user()->first()->name}}</h5>
           <p class="card-text">{{$post->content}}</p>
+          @if(count($post->tag()->get()) > 0)
+          {{-- <p class="card-text"> --}}
+            <div class="row align-items-center">
+              <div class="col-2">
+                <b>Tags: </b>
+              </div>
+              <div class="col-10">
+                <ul class="list-group list-group-horizontal mx-auto">
+                @foreach ($post->tag()->get() as $tag)
+                  <li class="list-group-item border-0">#{{$tag->name}}</li>
+                @endforeach
+                </ul>
+              </div>
+            </div>
+
+          {{-- </p> --}}
+          @endif
           <h6 class="card-text text-info"><b>Category: </b>{{$post->category()->first()->name}}</h6>
           <div class="row justify-content-center ">
             {{-- VIEW POST --}}
