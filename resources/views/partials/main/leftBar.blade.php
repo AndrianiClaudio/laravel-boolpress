@@ -39,5 +39,20 @@
                 </li>
             </ul>
         </li>
+        {{-- TAGS --}}
+        <li class="nav-item">
+            <a class="d-flex nav-link align-items-center" href="{{route('admin.tags.index')}}">
+                <i class="bi bi-tags d-block mr-2"></i>
+                Tags
+            </a>
+            {{-- <ul class="nav flex-column mx-3">
+                <li class="nav-item">
+                    <a class="d-flex nav-link align-items-center" href="{{route('admin.categories.create')}}">
+                        <i class="bi {{/**bi-bookmark-plus*/}} d-block mr-2"></i>
+                        Add Tags
+                    </a>
+                </li>
+            </ul> --}}
+        </li>
     </ul>
 </nav>

@@ -6,9 +6,9 @@
     {{-- REDIRECT STATUS MESSAGE --}}
     @if (session('status'))
     <div class="col-6 mx-auto">
-        <div class="alert alert-danger">
-            {{ session('status') }}
-        </div>
+      <div class="alert alert-danger">
+          {{ session('status') }}
+      </div>
     </div>
     @endif
     {{-- FINE REDIRECT STATUS MESSAGE --}}
@@ -40,6 +40,6 @@
       </div>
       @endforeach
     </div>
-
+  </div>
 </div>
 @endsection
