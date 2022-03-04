@@ -39,6 +39,9 @@
         </div>
       </div>
       @endforeach
+      <div class="col-3 mx-auto mb-3">
+        {{$posts->links()}}
+      </div>
     </div>
 </div>
 @endsection

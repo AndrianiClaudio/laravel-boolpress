@@ -39,6 +39,9 @@
         </div>
       </div>
       @endforeach
+      <div class="col mb-3">
+        {{$categories->links()}}
+      </div>
     </div>
   </div>
 </div>

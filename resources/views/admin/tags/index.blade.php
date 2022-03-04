@@ -39,6 +39,9 @@
             </form> --}}
         {{-- @endif --}}
       @endforeach
+      <div class="col-3 mx-auto mb-3">
+        {{$tags->links()}}
+      </div>
     </div>
   </div>
 </div>

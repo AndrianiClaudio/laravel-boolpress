@@ -17714,3 +17714,7 @@ a.text-dark:focus {
   content: "\F793";
 }
 
+ul.pagination {
+  justify-content: center;
+}
+
