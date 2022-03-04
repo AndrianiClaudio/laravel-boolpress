@@ -14,9 +14,10 @@
                 <i class="bi bi-stickies d-block mr-2"></i>
                 Posts
             </a>
-            <ul class="nav flex-column align-items-center">
+            <ul class="nav flex-column mx-3">
                 <li class="nav-item">
                     <a class="d-flex nav-link align-items-center" href="{{route('admin.posts.create')}}">
+                        <i class="bi bi-file-earmark-plus d-block mr-2"></i>
                         Add Post
                     </a>
                     
@@ -29,9 +30,10 @@
                 <i class="bi bi-bookmark d-block mr-2"></i>
                 Categories
             </a>
-            <ul class="nav flex-column align-items-center">
+            <ul class="nav flex-column mx-3">
                 <li class="nav-item">
                     <a class="d-flex nav-link align-items-center" href="{{route('admin.categories.create')}}">
+                        <i class="bi bi-bookmark-plus d-block mr-2"></i>
                         Add Category
                     </a>
                 </li>

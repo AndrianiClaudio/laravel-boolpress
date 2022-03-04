@@ -22,3 +22,11 @@
     -   CategoryController (index+show)
     -   Fix delle CRUD di post (tutte!) in modo da aggiungere la categoria
     -   Colleghiamo una category “generic” alla cancellazione di una category a tutti i post associati.
+
+## MILESTONE 4
+
+    -   Creazione tabella tag(migration+seeder+model)
+    -   Relazione NaN tra tag e post
+        -   (on delete set null)
+    -   TagController
+    -   CRUD di tag

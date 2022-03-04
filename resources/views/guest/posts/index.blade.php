@@ -18,7 +18,13 @@
           <h6 class="card-text text-info"><b>Category: </b>{{$post->category()->first()->name}}</h6>
           <div class="row justify-content-center ">
             {{-- VIEW POST --}}
-            <a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
+            <a class="btn btn-primary" 
+            href="
+            @guest {{ route('guest.posts.show', $post->slug) }}
+            @else  {{ route('admin.posts.show', $post->slug) }} @endguest
+            ">
+              View
+            </a>
             @if(Auth::check() && Auth::user()->id === $post->user_id)
               {{-- EDIT POST --}}
               <a class="btn btn-info ml-2" href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
