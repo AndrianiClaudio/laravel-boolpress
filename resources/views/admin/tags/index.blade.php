@@ -4,13 +4,13 @@
 <div class="container-fluid">
   <div class="row">
     {{-- REDIRECT STATUS MESSAGE --}}
-    {{-- @if (session('status'))
+    @if (session('status'))
     <div class="col-6 mx-auto">
-        <div class="alert alert-danger">
+        <div class="alert alert-success">
             {{ session('status') }}
         </div>
     </div>
-    @endif --}}
+    @endif
     {{-- FINE REDIRECT STATUS MESSAGE --}}
     <h1 class="w-100 text-center">TAGS</h1>
     {{-- DATI CATEGORIES --}}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Tag;
+use App\Model\Post;
 
 class TagController extends Controller
 {
@@ -37,7 +38,19 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        $validate = $request->validate([
+            'name' => 'required | alpha_dash | max:240'
+        ]);
+
+        $data = $request->all();
+        $newTag = new Tag();
+        $newTag->fill($data);
+        $newTag->slug = Post::createSlug($newTag->name);
+        $newTag->save();
+        // dd($newTag);
+        return redirect()->route('admin.tags.index', Tag::paginate(5))
+        ->with('status','Tag '.$newTag->name . ' created.');
     }
 
     /**
