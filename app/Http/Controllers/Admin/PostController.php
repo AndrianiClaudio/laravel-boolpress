@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Category;
+use App\Model\Tag;
 
 class PostController extends Controller
 {
@@ -30,8 +31,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories'),compact('tags'));
     }
 
     /**
@@ -53,15 +54,24 @@ class PostController extends Controller
                 ]
             );
 
-
+        // SPLIT & GET TAGS
+        $tags = [];
+        foreach ($data as $key => $value) {
+            if(str_starts_with($key,'tag_id')) {
+                $tags[] = $value;
+            }
+        }
+        
         // CREATE NEW POST
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
         $newPost->slug = Post::createSlug($data['title'],'post');
         $newPost->save();
+        Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
 
-        return redirect()->route('admin.posts.index', $newPost->slug)->with('status2','Post '.$newPost->title . ' created.');
+
+        return redirect()->route('admin.posts.index', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
     /**
@@ -131,6 +141,9 @@ class PostController extends Controller
             "Post $post->title updated with 0 changes",
             "Post $post->title updated"
         ];
+        $status = [
+            'statusError','status'
+        ];
         if(array_search(true,$changes)  === false){
             $i_messages = 0;
         } else {
@@ -139,7 +152,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('admin.posts.show', $post->slug)
-            ->with('status', $messages[$i_messages]);
+            ->with($status[$i_messages], $messages[$i_messages]);
     }
     /**
      * Remove the specified resource from storage.
@@ -152,7 +165,7 @@ class PostController extends Controller
         $post->tag()->detach();
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with('status', "Post $post->title deleted");
+        return redirect()->route('admin.posts.index')->with('statusError', "Post $post->title deleted");
     }
 
 }

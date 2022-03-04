@@ -53,7 +53,7 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('admin.categories.index', Category::paginate(5))
-            ->with('status2', 'Category ' . $newCategory->name . ' created.');
+            ->with('status', 'Category ' . $newCategory->name . ' created.');
     }
 
     /**
@@ -122,6 +122,6 @@ class CategoryController extends Controller
             $post->save(['category_id']);
         }
 
-        return redirect()->route('admin.categories.index')->with('status', "Category $category->name deleted");
+        return redirect()->route('admin.categories.index')->with('statusError', "Category $category->name deleted");
     }
 }

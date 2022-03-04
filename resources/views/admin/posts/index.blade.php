@@ -4,18 +4,18 @@
 <div class="container-fluid">
   <div class="row">
     {{-- MESSAGGIO REDIRECT STATUS --}}
-    @if (session('status'))
+    @if (session('statusError'))
     <div class="col-6 mx-auto">
       <div class="alert alert-danger mx-auto">
-        {{ session('status') }}
+        {{ session('statusError') }}
       </div>
     </div>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     @endif
-    @if (session('status2'))
+    @if (session('status'))
     <div class="col-6 mx-auto">
       <div class="alert alert-success mx-auto">
-        {{ session('status2') }}
+        {{ session('status') }}
       </div>
     </div>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}

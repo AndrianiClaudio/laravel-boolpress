@@ -13,6 +13,17 @@
       </div>
       {{-- FINE MESSAGGIO REDIRECT STATUS --}}
       @endif
+      {{-- MESSAGGIO REDIRECT STATUS --}}
+      @if (session('statusError'))
+      <div class="col-6 mx-auto">
+        <div class="row">
+          <div class="alert alert-danger mx-auto">
+            {{ session('statusError') }}
+          </div>
+        </div>
+      </div>
+      {{-- FINE MESSAGGIO REDIRECT STATUS --}}
+      @endif
       <div class="card w-75 mx-auto text-center ">
         <div class="card-title ml-4 mt-2">
           <h2><b>Title: </b>{{$post->title}}</h2>

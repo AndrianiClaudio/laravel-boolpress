@@ -3,7 +3,7 @@
 @section('content')
   <div class="container-fluid">
     {{-- MESSAGGIO REDIRECT STATUS --}}
-    {{-- @if (session('status'))
+    @if (session('status'))
       <div class="row">
         <div class="col-6 mx-auto">
           <div class="alert alert-success">
@@ -11,7 +11,7 @@
           </div>
         </div>
       </div>
-    @endif --}}
+    @endif
     <h2 class="w-100 text-center">All post with #{{$tag->name}}</h2>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     <div class="cards">

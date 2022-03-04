@@ -32,6 +32,19 @@
                 </div>
             @enderror
         </div>
+        
+        {{-- TAG SELECT --}}
+        <div class="mb-3">
+            @foreach ($tags as $i => $tag)
+            <div class="form-check-inline">
+                <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="flexCheckDefault-{{$i}}" name="tag_id-{{$i}}"
+                >
+                <label class="form-check-label" for="flexCheckDefault-{{$i}}">
+                    {{$tag->name}}
+                </label>
+            </div>
+            @endforeach
+        </div>
 
           {{-- TITLE --}}
           <div class="mb-3">
