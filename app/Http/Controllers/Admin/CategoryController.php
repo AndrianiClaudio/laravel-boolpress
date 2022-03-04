@@ -52,8 +52,8 @@ class CategoryController extends Controller
         $newCategory->save();
 
         return redirect()
-            ->route('admin.categories.show', $newCategory->slug)
-            ->with('status', 'Category ' . $newCategory->name . ' created.');
+            ->route('admin.categories.index', Category::paginate(5))
+            ->with('status2', 'Category ' . $newCategory->name . ' created.');
     }
 
     /**
@@ -102,7 +102,7 @@ class CategoryController extends Controller
         $category->update($data);
 
         return redirect()
-            ->route('admin.categories.show', $category->slug)
+            ->route('admin.categories.show', $category)
             ->with('status', 'category ' . $category->name. ' updated');
     }
 

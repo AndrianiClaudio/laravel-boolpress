@@ -14,7 +14,7 @@
     @endif
     <h2 class="w-100 text-center">All post of Category :{{$category->name}}</h2>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
-    <div class="cards">
+    <div class="cards text-center">
       @if((count($category->posts()->get()) === 0))
         <h4 class="w-75 mx-auto">Non sono presenti post in questa categoria.</h4>
       @else

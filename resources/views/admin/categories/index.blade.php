@@ -11,6 +11,13 @@
       </div>
     </div>
     @endif
+    @if (session('status2'))
+    <div class="col-6 mx-auto">
+      <div class="alert alert-success">
+          {{ session('status2') }}
+      </div>
+    </div>
+    @endif
     {{-- FINE REDIRECT STATUS MESSAGE --}}
     <h1 class="w-100 text-center">CATEGORIES</h1>
     {{-- DATI CATEGORIES --}}

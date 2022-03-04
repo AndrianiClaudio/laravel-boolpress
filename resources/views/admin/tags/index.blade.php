@@ -25,19 +25,17 @@
           </div>
           {{-- VIEW TAG --}}
           <div class="col-3 mx-auto">
-            <a class="btn btn-info" href="{{ route('admin.tags.show', $tag->slug) }}">View</a>
+            <a class="btn btn-primary" href="{{ route('admin.tags.show', $tag) }}">View</a>
+            {{-- EDIT TAG --}}
+            <a class="btn btn-info ml-2" href="{{ route('admin.tags.edit', $tag) }}">Modify</a>
           </div>
         </div>
-        {{-- @if($tag->slug !== 'generic') --}}
-            {{-- EDIT TAG --}}
-            {{-- <a class="btn btn-info ml-2" href="{{ route('admin.tags.edit', $tag->slug) }}">Modify</a> --}}
-            {{-- DELETE TAG --}}
-            {{-- <form class="ml-2" action="{{ route('admin.tags.destroy', $tag->slug) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <input class="btn btn-danger" type="submit" value="Delete">
-            </form> --}}
-        {{-- @endif --}}
+          {{-- DELETE TAG --}}
+          {{-- <form class="ml-2" action="{{ route('admin.tags.destroy', $tag->slug) }}" method="post">
+              @csrf
+              @method('DELETE')
+              <input class="btn btn-danger" type="submit" value="Delete">
+          </form> --}}
       @endforeach
       <div class="col-3 mx-auto mb-3">
         {{$tags->links()}}

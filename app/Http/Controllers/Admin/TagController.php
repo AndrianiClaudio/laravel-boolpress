@@ -72,7 +72,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -82,9 +82,23 @@ class TagController extends Controller
      * @param  Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tag)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        // dd($request,$tag);
+        $data = $request->all();
+        $validate = $request->validate([
+            'name' => 'required | alpha_dash | max:240'
+        ]);
+
+        if($data['name'] !== $tag->name) {
+            $tag->name = $data['name'];
+            $tag->slug = Post::createSlug($data['name']);
+        }
+        $tag->update($data);
+
+        return redirect()
+            ->route('admin.tags.show', $tag)
+            ->with('status', 'Tag ' . $tag->name . ' updated');
     }
 
     /**

@@ -61,7 +61,7 @@ class PostController extends Controller
         $newPost->slug = Post::createSlug($data['title']);
         $newPost->save();
 
-        return redirect()->route('admin.posts.show', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
+        return redirect()->route('admin.posts.index', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
     /**
