@@ -46,7 +46,7 @@ class TagController extends Controller
         $data = $request->all();
         $newTag = new Tag();
         $newTag->fill($data);
-        $newTag->slug = Post::createSlug($newTag->name);
+        $newTag->slug = Post::createSlug($newTag->name,'tag');
         $newTag->save();
         // dd($newTag);
         return redirect()->route('admin.tags.index', Tag::paginate(5))
@@ -92,7 +92,7 @@ class TagController extends Controller
 
         if($data['name'] !== $tag->name) {
             $tag->name = $data['name'];
-            $tag->slug = Post::createSlug($data['name']);
+            $tag->slug = Post::createSlug($data['name'],'tag');
         }
         $tag->update($data);
 

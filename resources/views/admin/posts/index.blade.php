@@ -12,6 +12,14 @@
     </div>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     @endif
+    @if (session('status2'))
+    <div class="col-6 mx-auto">
+      <div class="alert alert-success mx-auto">
+        {{ session('status2') }}
+      </div>
+    </div>
+    {{-- FINE MESSAGGIO REDIRECT STATUS --}}
+    @endif
     <div class="col-12">
       <h1 class="text-center">POSTS</h1>
     </div>

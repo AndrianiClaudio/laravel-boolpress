@@ -48,7 +48,7 @@ class CategoryController extends Controller
         ]);
 
         $newCategory->fill($data);
-        $newCategory->slug = Post::createSlug($newCategory->name);
+        $newCategory->slug = Post::createSlug($newCategory->name,'category');
         $newCategory->save();
 
         return redirect()
@@ -97,7 +97,7 @@ class CategoryController extends Controller
 
         if($data['name'] != $category->name) {
             $category->name = $data['name'];
-            $category->slug = Post::createSlug($data['name']);
+            $category->slug = Post::createSlug($data['name'],'category');
         }
         $category->update($data);
 

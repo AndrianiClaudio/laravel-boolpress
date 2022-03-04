@@ -28,7 +28,7 @@ class TagSeeder extends Seeder
         foreach ($tags as $tag) {
             $newTag = new Tag();
             $newTag->name = $tag;
-            $newTag->slug = Post::createSlug($newTag->name);
+            $newTag->slug = Post::createSlug($newTag->name,'tag');
             $newTag->save();
         }
     }

@@ -34,15 +34,31 @@ class Post extends Model
         return 'slug';
     }
 
-    public static function createSlug($title)
+    public static function createSlug($title, $model)
     {
         $slug = Str::slug($title, '-');
-        $oldPost = Post::where('slug', $slug)->first();
+        if($model === 'category') {
+            $oldPost = Category::where('slug', $slug)->first();
+        } else if ($model === 'tag') {
+            $oldPost = Tag::where('slug', $slug)->first();
+        } else {
+            // default: post
+            $oldPost = Post::where('slug', $slug)->first();
+        }
 
         $counter = 0;
         while ($oldPost) {
             $newSlug = $slug . '-' . $counter;
-            $oldPost = Post::where('slug', $newSlug)->first();
+            // $oldPost = Post::where('slug', $newSlug)->first();
+            if($model === 'category') {
+                $oldPost = Category::where('slug', $newSlug)->first();
+            } else if ($model === 'tag') {
+                $oldPost = Tag::where('slug', $newSlug)->first();
+            } else {
+                // default: post
+                $oldPost = Post::where('slug', $newSlug)->first();
+            }
+            
             $counter++;
         }
 
