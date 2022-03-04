@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('updated_at','desc')->where('user_id', '=', Auth::id())->paginate(10);
+        $posts = Post::orderBy('updated_at','desc')->where('user_id', '=', Auth::id())->paginate(5);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -61,7 +61,7 @@ class PostController extends Controller
         $newPost->slug = Post::createSlug($data['title']);
         $newPost->save();
 
-        return redirect()->route('admin.posts.show', $newPost->slug);
+        return redirect()->route('admin.posts.show', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
     /**

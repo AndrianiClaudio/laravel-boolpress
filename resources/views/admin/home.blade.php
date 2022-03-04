@@ -2,18 +2,9 @@
 
 @section('content')
     <div class="container">
-        {{-- MESSAGGIO REDIRECT STATUS --}}
-        <div class="row">
-            @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-            @endif
-        </div>
-        {{-- FINE MESSAGGIO REDIRECT STATUS --}}
         <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card w-75 mx-auto">
                     <div class="card-title ml-4 my-2 text-primary">
                         <h1>
                             Welcome {{ Auth::user()->name }}

@@ -27,12 +27,13 @@
         <main class="py-4">
             <div class="container-fluid">
                 <div class="row">
-                    @include('partials.main.leftBar')
-                    <div class="col">
+                    <div class="col-4 col-md-3 col-lg-2">
+                        @include('partials.main.leftBar')
+                    </div>
+                    <div class="col-8 col-md-9 col-lg-10">
                         @yield('content')
                     </div>
                 </div>
-
         </main>
     </div>
 </body>

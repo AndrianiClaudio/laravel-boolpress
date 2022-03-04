@@ -1,10 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-  <div>
-    
-  </div>
+<div class="container-fluid">
   <div class="row">
     <div class="col card p-3">
         <h2>Create a new Category</h2>

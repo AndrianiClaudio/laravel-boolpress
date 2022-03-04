@@ -22,7 +22,3 @@
     -   CategoryController (index+show)
     -   Fix delle CRUD di post (tutte!) in modo da aggiungere la categoria
     -   Colleghiamo una category “generic” alla cancellazione di una category a tutti i post associati.
-
-## TO-DO
-
-    -   Grafica https://themes.getbootstrap.com/

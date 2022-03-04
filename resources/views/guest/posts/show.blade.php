@@ -24,7 +24,8 @@
               <h3>Category: {{$post->category()->first()->name}}</h3>
               <h4>Author: {{$post->user()->first()->name}}</h3>
               <p><b>Content: </b>{{$post->content}}</p>
-              <b>Created: {{$post->created_at}}</b>
+              <b>Created: {{$post->created_at}}</b><br>
+              <b>Last update: {{$post->updated_at}}</b>
             </div>
           </div>
         </div>

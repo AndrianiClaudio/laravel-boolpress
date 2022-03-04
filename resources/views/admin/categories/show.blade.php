@@ -4,71 +4,50 @@
     <div class="container">
       {{-- MESSAGGIO REDIRECT STATUS --}}
       @if (session('status'))
-      <div class="col">
-        <div class="row">
+      <div class="row">
+        <div class="col-6 mx-auto">
           <div class="alert alert-success">
             {{ session('status') }}
           </div>
         </div>
       </div>
       @endif
+       <h2 class="w-100 text-center">All post of Category :{{$category->name}}</h2>
       {{-- FINE MESSAGGIO REDIRECT STATUS --}}
-      <div class="card">
-        {{-- TITLE --}}
-        <div class="card-title ml-4">
-          <h2>All post of Category :{{$category->name}}</h2>
+  <div class="cards">
+    
+    {{-- @dd($category->posts()->get() === 0) --}}
+    @if((count($category->posts()->get()) === 0))
+      <h4 class="w-75 mx-auto">Non sono presenti post in questa categoria.</h4>
+    @else
+      @foreach ($category->posts()->get() as $post)
+      <div class="card w-75 mx-auto text-center mb-3">
+        <div class="card-title ml-4 mt-2">
+          <h2><b>Title: </b>{{$post->title}}</h2>
         </div>
-        <div class="card-body">
-          {{-- STAMPA DATI CATEGORY --}}
-          <table class="table table-striped">
-            {{-- TABLE HEADER --}}
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Updated At</th>
-                <th colspan="3" scope="col">Actions</th>
-              </tr>
-            </thead>
-            {{-- TABLE BODY --}}
-            <tbody>
-              @foreach ($category->posts()->get() as $post)
-                <tr>
-                  <td>{{ $post->id }}</td>
-                  <td>{{ $post->title }}</td>
-                  <td>{{ $post->created_at }}</td>
-                  <td>{{ $post->updated_at }}</td>
-                  {{-- VIEW --}}
-                  <td><a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">View</a>
-                  </td>
-                  {{-- EDIT --}}
-                  <td>
-                    <a 
-                    class="btn btn-info 
-                      @if(Auth::user()->id !== $post->user_id) 
-                        disabled
-                      @endif"
-                    href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
-                  </td>
-                  {{-- DELETE --}}
-                  <td>
-                    <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <input 
-                      class="btn btn-danger" type="submit" value="Delete"
-                      @if(Auth::user()->id !== $post->user_id) 
-                      disabled
-                    @endif>
-                    </form>
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-          {{-- FINE DATI CATEGORY --}}
+        <div class="card-body pt-0">
+          <h3>Category: {{$post->category()->first()->name}}</h3>
+          <h4>Author: {{$post->user()->first()->name}}</h3>
+          <p><b>Content: </b>{{$post->content}}</p>
+          <b>Created: {{$post->created_at}}</b><br>
+          <b>Last update: {{$post->updated_at}}</b>
+          @if(Auth::user()->id === $post->id)
+          <hr>
+            <div class="row align-items-center justify-content-center text-center">
+              <a class='btn btn-info' href="{{route('admin.posts.edit',$post->slug)}}">Edit Post</a>
+            
+              {{-- Delete this post --}}
+              <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <input class="btn btn-danger ml-3" type="submit" value="Delete">
+              </form>
+            </div>
+          @endif
         </div>
       </div>
+      @endforeach
+    @endif
     </div>
+  </div>
 @endsection

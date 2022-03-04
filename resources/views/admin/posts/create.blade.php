@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
   <div>
     
   </div>
-  <div class="row">
+  <div class="row w-75 mx-auto">
     <div class="col card p-3">
         <h2>Create a new Post</h2>
-      <form action="{{ route('admin.categories.store') }}" method="POST">
+      <form action="{{ route('admin.posts.store') }}" method="POST">
           @csrf
           @method('POST')
-        {{-- NEW CATEGORY SELECT --}}
+        {{-- CATEGORY SELECT --}}
+        
         <div class="mb-3">
             <select class="form-select" name='category_id'>
                 <option class="" value="">Select a category</option>
@@ -32,7 +33,7 @@
             @enderror
         </div>
 
-          {{-- NEW POST TITLE --}}
+          {{-- TITLE --}}
           <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
@@ -43,7 +44,7 @@
               @enderror
           </div>
 
-          {{-- NEW POST CONTENT --}}
+          {{-- CONTENT --}}
           <div class="mb-3">
               <label for="content" class="form-label">Content</label>
               <textarea class="form-control" id="content" rows="3"

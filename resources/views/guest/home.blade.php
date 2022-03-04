@@ -8,8 +8,7 @@
 @section('content')
     <div class="container">
       @guest
-        {{-- Ti trovi in views/ 'guest/home.blade.php' --}}
-        <b class="text-alert">Effettua il login o registrati</b>
+        <h1 class="text-alert">Effettua il login o registrati!!</h1>
         @else
       @endguest
     </div>

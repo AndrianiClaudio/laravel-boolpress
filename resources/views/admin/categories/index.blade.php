@@ -1,67 +1,45 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     {{-- REDIRECT STATUS MESSAGE --}}
     @if (session('status'))
-    <div class="col-12">
+    <div class="col-6 mx-auto">
         <div class="alert alert-danger">
             {{ session('status') }}
         </div>
     </div>
     @endif
     {{-- FINE REDIRECT STATUS MESSAGE --}}
-    <header>
-        <h1>CATEGORIES</h1>
-        {{-- NEW CREATE --}}
-        <nav class="navbar navbar-inline">
-            <a href="{{route('admin.categories.create')}}" class="nav-link">Create a new Category</a>
-        </nav>
-    </header>
+    <h1 class="w-100 text-center">CATEGORIES</h1>
     {{-- DATI CATEGORIES --}}
-    <table class="table table-striped">
-        {{-- TABLE HEADER --}}
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Updated At</th>
-                <th scope="col" colspan="3">Actions</th>
-            </tr>
-        </thead>
-        {{-- TABLE BODY --}}
-        <tbody>
-            @foreach ($categories as $category)
-                <tr>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->created_at }}</td>
-                    <td>{{ $category->updated_at }}</td>
-                    {{-- VIEW --}}
-                    <td><a class="btn btn-primary" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
-                    </td>
-                    {{-- EDIT --}}
-                    <td><a class="btn btn-info
-                        @if($category->slug === 'generic')
-                            disabled
-                        @endif" href="{{ route('admin.categories.edit', $category->slug) }}">Edit</a>
-                    </td>
-                    {{-- DELETE --}}
-                    <td>
-                        <form action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">
-                          @csrf
-                          @method('DELETE')
-                          <input class="btn btn-danger" type="submit" value="Delete" 
-                          @if($category->slug === 'generic')
-                            disabled
-                          @endif>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {{-- FINE DATI CATEGORIES --}}
+      
+    {{-- STAMPA DATI POST --}}
+    <div class="cards mx-auto">
+      @foreach ($categories as $category)
+      <div class="card text-center mb-3 p-3">
+        <div class="card-body">
+          <h4 class="card-title">{{$category->name}}</h4>
+          <h5 class="card-subtitle mb-2 text-muted"><b>Created: </b>{{$category->created_at}}</h5>
+          <div class="row justify-content-center ">
+            {{-- VIEW POST --}}
+            <a class="btn btn-info" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
+            @if($category->slug !== 'generic')
+                {{-- EDIT POST --}}
+                <a class="btn btn-info ml-2" href="{{ route('admin.categories.edit', $category->slug) }}">Modify</a>
+                {{-- DELETE POST --}}
+                <form class="ml-2" action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+            @endif
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
 
 </div>
 @endsection
