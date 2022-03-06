@@ -73,7 +73,10 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('admin.tags.show',compact('tag'));
+        $tagName = $tag->name;
+        $tag = $tag->post()->paginate(5);
+        // dd($tag,$tagName);
+        return view('admin.tags.show',['tag' => $tag,'tagName' => $tagName]);
     }
 
     /**

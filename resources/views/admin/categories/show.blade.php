@@ -19,21 +19,22 @@
         <h4 class="w-75 mx-auto">Non sono presenti post in questa categoria.</h4>
       @else
         @foreach($category->toArray()['data'] as $key => $post)
+          @php $categoryMany = $category->items()[$key]; @endphp
           <div class="card w-75 mx-auto text-center mb-3">
             <div class="card-title ml-4 mt-2">
               <h2><b>Title: </b>{{$post['title']}}</h2>
             </div>
             <div class="card-body pt-0">
-              <h4>Author: {{$category->items()[$key]->user()->first()->name}}</h3>
+              <h4>Author: {{$categoryMany->user()->first()->name}}</h3>
               <p><b>Content: </b>{{$post['content']}}</p>
-              @if(count($category->items()[$key]->tag()->get()) > 0)
+              @if(count($categoryMany->tag()->get()) > 0)
                 <div class="row align-items-center">
                   <div class="col-2">
                     <b>Tags: </b>
                   </div>
                   <div class="col-10">
                     <ul class="list-group list-group-horizontal flex-wrap  mx-auto">
-                    @foreach ($category->items()[$key]->tag()->get() as $tag)
+                    @foreach ($categoryMany->tag()->get() as $tag)
                       <li class="list-group-item border-0">#{{$tag->name}}</li>
                     @endforeach
                     </ul>
