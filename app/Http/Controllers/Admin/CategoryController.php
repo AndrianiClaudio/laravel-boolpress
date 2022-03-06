@@ -60,14 +60,19 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  Category $category
+     * @param  $name : $category->name
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', compact('category'));
+        $categoryName = $category->name;
+        $category = Post::where('category_id', $category->id)->paginate(5);
+        // dd($category);
+        // return view('admin.categories.show', compact('category'));
+        return view('admin.categories.show', ['category' => $category,'categoryName' => $categoryName]);
         
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -76,7 +81,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        // dd($category);
+        
         return view('admin.categories.edit',compact('category'));
     }
 
