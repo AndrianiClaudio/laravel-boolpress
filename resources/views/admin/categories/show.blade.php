@@ -15,11 +15,11 @@
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     <h2 class="w-100 text-center">All post of Category: {{$categoryName}}</h2>
     <div class="cards text-center">
-      @if((count($category) === 0))
+      @if((count($posts) === 0))
         <h4 class="w-75 mx-auto">Non sono presenti post in questa categoria.</h4>
       @else
-        @foreach($category->toArray()['data'] as $key => $post)
-          @php $categoryMany = $category->items()[$key]; @endphp
+        @foreach($posts->toArray()['data'] as $key => $post)
+          @php $categoryMany = $posts->items()[$key]; @endphp
           <div class="card w-75 mx-auto text-center mb-3">
             <div class="card-title ml-4 mt-2">
               <h2><b>Title: </b>{{$post['title']}}</h2>
@@ -62,7 +62,7 @@
         @endforeach
       @endif
       <div class="col-12">
-        {{$category->links()}}
+        {{$posts->links()}}
       </div>
     </div>
   </div>

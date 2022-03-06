@@ -66,10 +66,10 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $categoryName = $category->name;
-        $category = Post::where('category_id', $category->id)->paginate(5);
+        $posts = Post::where('category_id', $category->id)->paginate(5);
         // dd($category);
         // return view('admin.categories.show', compact('category'));
-        return view('admin.categories.show', ['category' => $category,'categoryName' => $categoryName]);
+        return view('admin.categories.show', ['posts' => $posts,'categoryName' => $categoryName]);
         
     }
     
