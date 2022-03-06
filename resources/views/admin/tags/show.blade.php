@@ -16,28 +16,28 @@
     <h2 class="w-100 text-center">All post with #{{$tagName}}</h2>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     <div class="cards">
-      @if (count($tag) === 0)
+      @if (count($posts) === 0)
       <h4 class="w-75 mx-auto text-center">Non sono presenti post con questo tag.</h4>
       @else
-        @foreach ($tag->toArray()['data'] as $key => $post)
-        @php $tagMany = $tag->items()[$key]; @endphp
+        @foreach ($posts->toArray()['data'] as $key => $post)
+        @php $postMany = $posts->items()[$key]; @endphp
         <div class="card w-75 mx-auto text-center mb-3">
           <div class="card-title ml-4 mt-2">
             <h2><b>Title: </b>{{$post['title']}}</h2>
           </div>
           <div class="card-body pt-0">
-            <h3>Category: {{$tagMany->category()->first()->name}}</h3>
-            <h4>Author: {{$tagMany->user()->first()->name}}</h3>
+            <h3>Category: {{$postMany->category()->first()->name}}</h3>
+            <h4>Author: {{$postMany->user()->first()->name}}</h3>
             <p><b>Content: </b>{{$post['content']}}</p>
             
-            @if(count($tagMany->tag()->get()) > 0)
+            @if(count($postMany->tag()->get()) > 0)
               <div class="row align-items-center">
                 <div class="col-2">
                   <b>Tags: </b>
                 </div>
                 <div class="col-10">
                   <ul class="list-group list-group-horizontal flex-wrap mx-auto">
-                  @foreach ($tagMany->tag()->get()->toArray() as $tags)
+                  @foreach ($postMany->tag()->get()->toArray() as $tags)
                     <li class="list-group-item border-0">#{{$tags['name']}}</li>
                   @endforeach
                   </ul>
@@ -65,7 +65,7 @@
       @endif
     </div>
     <div class="col-12">
-      {{$tag->links()}}
+      {{$posts->links()}}
     </div>
   </div>
 @endsection

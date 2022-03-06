@@ -74,9 +74,9 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
         $tagName = $tag->name;
-        $tag = $tag->post()->paginate(5);
+        $posts = $tag->post()->paginate(5);
         // dd($tag,$tagName);
-        return view('admin.tags.show',['tag' => $tag,'tagName' => $tagName]);
+        return view('admin.tags.show',['posts' => $posts,'tagName' => $tagName]);
     }
 
     /**
