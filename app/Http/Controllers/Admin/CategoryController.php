@@ -52,7 +52,7 @@ class CategoryController extends Controller
         $newCategory->save();
 
         return redirect()
-            ->route('admin.categories.index', Category::paginate(5))
+            ->route('admin.categories.index', )
             ->with('status', 'Category ' . $newCategory->name . ' created.');
     }
 

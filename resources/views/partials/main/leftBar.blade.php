@@ -1,5 +1,5 @@
 
-<nav class='navbar' id="sidebarMenu" class="d-block bg-light sidebar">
+<nav class="navbar d-block bg-light sidebar position-sticky sticky-top" id="sidebarMenu">
     <ul class="nav flex-column">
         {{-- DASHBOARD --}}
         <li class="nav-item">

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md shadow-sm
 @guest navbar-light bg-light 
-@else navbar-dark bg-dark @endguest">
+@else navbar-dark bg-dark @endguest"
+id="navbar-header">
     <div class="container-fluid px-3">
         <div class="d-flex">
             {{-- LOGO --}}
