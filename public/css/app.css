@@ -17718,6 +17718,11 @@ ul.pagination {
   justify-content: center;
 }
 
+.cards .card {
+  border: 2px solid #3490dc;
+  max-width: 700px;
+}
+
 img.img-fluid {
   max-height: 400px;
   max-width: 500px;

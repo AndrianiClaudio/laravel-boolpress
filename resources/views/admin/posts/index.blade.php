@@ -13,58 +13,93 @@
     {{-- FINE MESSAGGIO REDIRECT STATUS ERROR --}}
     @endif
     <div class="col-12">
-      <h1 class="text-center">POSTS</h1>
+      <h1 class="text-center h1 text-danger">POSTS</h1>
     </div>
     
     {{-- STAMPA DATI POST --}}
     <div class="cards w-100 mx-auto">
       @foreach ($posts as $post)
-      <div class="card w-75 mx-auto text-center mb-3">
-        <div class="card-body position-relative">
-          {{-- DELETE POST --}}
-          <form class="position-absolute fixed-top text-right" action="{{ route('admin.posts.destroy', $post) }}" method="post" title="delete">
-              @csrf
-              @method('DELETE')
-              {{-- <input class="btn btn-danger" type="submit" value="Delete"> --}}
-              <button class="btn" type="submit">
-                <i class="d-block ml-auto bi bi-trash"></i>
-              </button>
-          </form>
-
-          {{-- @dd($post['image']) --}}
-          @if(!empty($post['image']))
-            <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
-          @else
-            <img class="img img-fluid" src="https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg" alt="{{$post->title}}">
-          @endif
-
-          <h4 class="card-tile mb-2">{{$post->title}}</h4>
-          <h5 class="card-subtitle mb-2 text-muted"><b>Author: </b>{{$post->user()->first()->name}}</h5>
-          <p class="card-text">{{$post->content}}</p>
-          @if(count($post->tag()->get()) > 0)
-            <div class="row align-items-center">
-              <div class="col-2">
-                <b>Tags: </b>
+      {{-- <div class="card w-75 mx-auto mb-3 border-2 rounded border-primary"> --}}
+      <div class="card w-75 mx-auto mb-3 border-2 rounded">
+        <div class="card-body">
+          {{-- HEADER   --}}
+          <header class="header">
+            <div class="row justify-content-between">
+              {{-- POST TITLE --}}
+              <div class="col">
+                <h2 class="card-tile mb-2 h2">
+                  {{-- VIEW POST --}}
+                  <a class="text-dark text-decoration-none text-uppercase" href="{{ route('admin.posts.show', $post) }}">
+                    {{$post->title}}
+                  </a>
+                </h2>
               </div>
-              <div class="col-10">
+              {{-- EDIT & DELETE --}}
+              <ul class="list-inline">
+                {{-- EDIT POST --}}
+                <li class="list-inline-item">
+                  <a class="btn text-success ml-2" href="{{ route('admin.posts.edit', $post) }}" title="Edit {{$post->title}}">
+                    <i class="bi bi-pen"></i>
+                  </a>
+                </li>
+                {{-- DELETE POST --}}
+                <li class="list-inline-item">
+                  <form class="" action="{{ route('admin.posts.destroy', $post) }}" method="post" title="Delete {{$post->title}}">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn" type="submit">
+                        <i class="d-block bi bi-trash text-danger"></i>
+                      </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              <div class="col">
+                {{-- CATEGORY & AUTHOR --}}
+                <div class="d-flex justify-content-between align-items-center">
+                  {{-- CATEGORY  --}}
+                  <span class="card-text text-info h5">
+                    {{$post->category()->first()->name}}
+                  </span>
+                  {{-- POST AUTHOR --}}
+                  <span class="card-subtitle mb-2 text-muted">
+                    Created by {{$post->user()->first()->name}}.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </header>
+          {{-- FINE HEADER  --}}
+          <hr class="bg-primary">
+            {{-- POST IMAGE --}}
+            @if(!empty($post['image']))
+              <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
+            @endif
+          {{-- POST CONTENT --}}
+          <p class="card-text h4">
+            <em>
+              {{$post->content}}
+            </em>
+          </p>
+          {{-- POST TAGS --}}
+          @if(count($post->tag()->get()) > 0)
+            <div class="row">
+              <div class="col">
                 <ul class="list-group list-group-horizontal flex-wrap mx-auto">
                 @foreach ($post->tag()->get() as $tag)
-                  <li class="list-group-item border-0">#{{$tag->name}}</li>
+                  <li class="list-group-item border-0">
+                    <a href="{{route('admin.tags.show',$tag)}}">
+                      <span class="rounded-pill bg-light text-dark h6 p-2 font-weight-bold text-decoration-none">
+                        #{{$tag->name}}
+                      </span>
+                    </a>
+                  </li>
                 @endforeach
                 </ul>
               </div>
             </div>
           @endif
-          <h6 class="card-text text-info"><b>Category: </b>{{$post->category()->first()->name}}</h6>
-          <div class="row justify-content-center ">
-            
-            {{-- VIEW POST --}}
-            <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">View</a>
-
-            {{-- EDIT POST --}}
-            <a class="btn btn-info ml-2" href="{{ route('admin.posts.edit', $post) }}">Modify</a>
-
-          </div>
         </div>
       </div>
       @endforeach
