@@ -29,7 +29,7 @@
       @foreach ($posts as $post)
       <div class="card w-75 mx-auto text-center mb-3">
         <div class="card-body">
-          <h4 class="card-title">{{$post->title}}</h4>
+          <h4 class="card-tile mb-2">{{$post->title}}</h4>
           <h5 class="card-subtitle mb-2 text-muted"><b>Author: </b>{{$post->user()->first()->name}}</h5>
           <p class="card-text">{{$post->content}}</p>
           @if(count($post->tag()->get()) > 0)

@@ -8,10 +8,11 @@ class Photo extends Model
 {
     protected $fillable = [
         'path',
-        'post_id'
+        'post_id',
+        'slug'
     ];
 
-    public function posts() {
+    public function post() {
         return $this->belongsTo('App\Model\Post');
     }
 }

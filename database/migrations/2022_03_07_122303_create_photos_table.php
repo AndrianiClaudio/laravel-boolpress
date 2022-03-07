@@ -17,6 +17,7 @@ class CreatePhotosTable extends Migration
             $table->id();
 
             $table->string('path');
+            $table->string('slug')->unique;
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')
                 ->references('id')

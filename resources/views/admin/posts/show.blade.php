@@ -16,6 +16,14 @@
 
       <div class="card w-75 mx-auto text-center ">
         <div class="card-title ml-4 mt-2">
+
+
+          @if(!empty($post->photo->path))
+            <img class="img img-fluid" src="{{asset('storage/'.$post->photo->path)}}" alt="{{$post->title}}">
+            {{-- @dd(asset('storage/'.$post->photo)) --}}
+            {{-- @dd($post->photo) --}}
+          @endif
+
           <h2><b>Title: </b>{{$post->title}}</h2>
         </div>
         <div class="card-body pt-0">

@@ -11,6 +11,7 @@ use App\Model\Category;
 use App\Model\Tag;
 use Illuminate\Support\Facades\Storage;
 use App\Model\Photo;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -56,7 +57,7 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
-                'photo' => 'required|image'
+                'photo' => 'nullable|image'
                 ]
             );
         // SPLIT & GET TAGS
@@ -69,23 +70,41 @@ class PostController extends Controller
         
         // CREATE NEW POST
         $newPost = new Post();
+        
+
+        // dd($data);
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
         $newPost->slug = Post::createSlug($data['title'],'post');
-        
-        
-        // dd($data);
+        // // dd(explode('/',$img_path)[2]);
+
+        // // dd($newImage->slug);
+
+        //    // dd($data);
         $newPost->save();
+
+        
+        
+
+
+        if(!empty($data['photo'])) {
+            $img_path = Storage::put('uploads/posts', $data['photo']);
+            $newPost['photo'] = $img_path;
+            $newImage = new Photo();
+            $newImage->path = $img_path;
+            $newImage->slug = Str::slug(explode('/',$img_path)[2].'_'.$newPost->slug,'-');
+            $newImage->post_id = $newPost->id;
+            $newImage->save();
+        }
+
+        
+
+             
         Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
         
-        $img_path = Storage::put('uploads/posts', $data['photo']);
-        $newImage = new Photo();
 
-        $newImage->path = $img_path;
-        $newImage->post_id = $newPost->id;
-        $newImage->save();
-        
-        return redirect()->route('admin.posts.index', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
+
+        return redirect()->route('admin.posts.show', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
     /**
