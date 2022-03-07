@@ -54,6 +54,10 @@
                     </li>
                   </ul>
                 </div>
+                {{-- POST IMAGE --}}
+                @if(!empty($post['image']))
+                  <img class="d-block mx-auto img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
+                @endif
                 <div class="row">
                   <div class="col">
                     {{-- CATEGORY & AUTHOR --}}
@@ -72,10 +76,7 @@
               </header>
               {{-- FINE HEADER  --}}
               <hr class="bg-primary">
-                {{-- POST IMAGE --}}
-                @if(!empty($post['image']))
-                  <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
-                @endif
+
               {{-- POST CONTENT --}}
               <p class="card-text h4">
                 <em>

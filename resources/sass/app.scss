@@ -14,12 +14,11 @@ ul {
   }
 }
 
-.cards {
-  .card {
-    border: 2px solid $blue;
-    max-width: 700px;
-  }
+.card {
+  border: 2px solid $blue;
+  max-width: 700px;
 }
+
 img.img-fluid {
   max-height: 400px;
   max-width: 500px;

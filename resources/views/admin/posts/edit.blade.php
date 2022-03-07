@@ -7,7 +7,7 @@
         <h2>Edit {{$post->title}}</h2>
             
         @if(!empty($post['image']))
-            <img class="img img-fluid" src="{{asset('storage/'.$post['image'])}}" alt="{{$post['title']}}">
+            <img class="d-block mx-auto img img-fluid" src="{{asset('storage/'.$post['image'])}}" alt="{{$post['title']}}">
         @endif
         <form action="{{ route('admin.posts.update',$post->slug) }}" method="POST"  enctype="multipart/form-data">
             @csrf
