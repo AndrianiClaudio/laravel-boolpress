@@ -38,6 +38,8 @@ Route::middleware('auth')
         Route::resource('categories', 'CategoryController');
         // TAGS
         Route::resource('tags', 'TagController');
+        // PHOTOS
+        Route::resource('photos', 'PhotoController');
     });
 
 

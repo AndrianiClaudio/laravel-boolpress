@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Category;
 use App\Model\Tag;
+use Illuminate\Support\Facades\Storage;
+use App\Model\Photo;
 
 class PostController extends Controller
 {
@@ -44,16 +46,19 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // dd($data['photo']);
+
+        // dd($img_path);
         
         // VALIDATE
         $validate = $request->validate(
             [
                 'title' => 'required|max:255',
                 'content' => 'required',
-                'category_id' => 'exists:App\Model\Category,id'
+                'category_id' => 'exists:App\Model\Category,id',
+                'photo' => 'required|image'
                 ]
             );
-
         // SPLIT & GET TAGS
         $tags = [];
         foreach ($data as $key => $value) {
@@ -67,13 +72,19 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
         $newPost->slug = Post::createSlug($data['title'],'post');
-
-
+        
+        
         // dd($data);
         $newPost->save();
         Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
+        
+        $img_path = Storage::put('uploads/posts', $data['photo']);
+        $newImage = new Photo();
 
-
+        $newImage->path = $img_path;
+        $newImage->post_id = $newPost->id;
+        $newImage->save();
+        
         return redirect()->route('admin.posts.index', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
@@ -116,7 +127,6 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->all();
-
         $validate = $request->validate(
             [
                 'title' => 'required|max:255',
