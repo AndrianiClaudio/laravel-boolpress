@@ -67,8 +67,6 @@ class CategoryController extends Controller
     {
         $categoryName = $category->name;
         $posts = Post::orderBy('updated_at','desc')->where('category_id', $category->id)->paginate(5);
-        // dd($category);
-        // return view('admin.categories.show', compact('category'));
         return view('admin.categories.show', ['posts' => $posts,'categoryName' => $categoryName]);
         
     }

@@ -3,22 +3,14 @@
 @section('content')
 <div class="container-fluid">
   <div class="row">
-    {{-- MESSAGGIO REDIRECT STATUS --}}
+    {{-- MESSAGGIO REDIRECT STATUS ERROR --}}
     @if (session('statusError'))
       <div class="col-6 mx-auto">
         <div class="alert alert-danger mx-auto">
           {{ session('statusError') }}
         </div>
       </div>
-    {{-- FINE MESSAGGIO REDIRECT STATUS --}}
-    @endif
-    @if (session('status'))
-      <div class="col-6 mx-auto">
-        <div class="alert alert-success mx-auto">
-          {{ session('status') }}
-        </div>
-      </div>
-      {{-- FINE MESSAGGIO REDIRECT STATUS --}}
+    {{-- FINE MESSAGGIO REDIRECT STATUS ERROR --}}
     @endif
     <div class="col-12">
       <h1 class="text-center">POSTS</h1>

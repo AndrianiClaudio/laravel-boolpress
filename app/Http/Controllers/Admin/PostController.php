@@ -21,6 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        // ottengo tutti i post dell'utente loggato
         $posts = Post::orderBy('updated_at','desc')->where('user_id', '=', Auth::id())->paginate(5);
         return view('admin.posts.index', compact('posts'));
     }
@@ -32,7 +33,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        // categorie per la select
         $categories = Category::all();
+        // tags per la checkbox
         $tags = Tag::all();
         return view('admin.posts.create', compact('categories'),compact('tags'));
     }
@@ -49,7 +52,7 @@ class PostController extends Controller
         // VALIDATE
         $validate = $request->validate(
             [
-                'title' => 'required|max:255',
+                'title' => 'required|max:240',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
                 'tags.*' => 'nullable|exists:App\Model\Tag,id',
@@ -61,17 +64,18 @@ class PostController extends Controller
         $newPost = new Post();
         
 
-        // dd($data);
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
         $newPost->slug = Post::createSlug($data['title'],'post');
 
+        // Upload foto se caricata nel form
         if(!empty($data['photo'])) {
             $img_path = Storage::put('uploads/posts', $data['photo']);
             $newPost['image'] = $img_path;
         }
         $newPost->save();
 
+        // associa i tags al post
         $newPost->tag()->attach($data['tags']);
         
         return redirect()->route('admin.posts.show', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
@@ -117,30 +121,26 @@ class PostController extends Controller
         $data = $request->all();
         $validate = $request->validate(
             [
-                'title' => 'required|max:255',
+                'title' => 'required|max:240',
                 'content' => 'required',
-                'category_id' => 'exists:App\Model\Category,id',
+                'category_id' => 'required | exists:App\Model\Category,id',
                 'tags.*' => 'nullable|exists:App\Model\Tag,id',
                 'photo' => 'nullable|image'
                 ]);
 
-        $changes = [false, false, false];
         // CHECK & UPDATE IF WE HAVE ANY CHANGE
         if ($data['title'] != $post->title) {
             $post->title = $data['title'];
             $post->slug = Post::createSlug($data['title'],'post');
-            $changes[0] = true;
         }
         if ($data['content'] != $post->content) {
             $post->content = $data['content'];
-            $changes[1] = true;
         }
         if ($data['category_id'] != $post->category_id) {
             $post->category_id = $data['category_id'];
-            $changes[2] = true;
         }
 
-
+        // photo
         if(!empty($data['photo'])) {
             Storage::delete($post->image);
             $img_path = Storage::put('uploads/posts', $data['photo']);
@@ -148,7 +148,9 @@ class PostController extends Controller
         }
         
         $post->update();
+        // tags
         $post->tag()->sync($data['tags']);
+
         return redirect()
             ->route('admin.posts.show', $post->slug)
             ->with('status', 'Post '. $post->title .' updated.');

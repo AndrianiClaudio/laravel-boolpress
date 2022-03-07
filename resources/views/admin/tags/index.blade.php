@@ -11,13 +11,6 @@
         </div>
     </div>
     @endif
-    @if (session('statusError'))
-    <div class="col-6 mx-auto">
-        <div class="alert alert-danger">
-            {{ session('statusError') }}
-        </div>
-    </div>
-    @endif
     {{-- FINE REDIRECT STATUS MESSAGE --}}
     <h1 class="w-100 text-center">TAGS</h1>
     {{-- DATI CATEGORIES --}}

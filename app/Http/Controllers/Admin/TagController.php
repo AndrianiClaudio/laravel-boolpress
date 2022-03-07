@@ -38,31 +38,18 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $data = $request->all();
         $validate = $request->validate([
-            'name' => 'required | alpha_dash | max:240'
+            'name' => 'required | alpha_dash | max:240 | unique:App\Model\Tag,name'
         ]);
 
-
-        $tags = Tag::all();
-        $tagNames = [];
-        foreach ($tags as $tag) {
-            $tagNames[] = $tag->name;
-        }
-        $data = $request->all();
-
-        if(!in_array($data['name'],$tagNames)) {
-            $newTag = new Tag();
-            $newTag->fill($data);
-            $newTag->slug = Post::createSlug($newTag->name,'tag');
-            $newTag->save();
-            // dd($newTag);
-            return redirect()->route('admin.tags.index', Tag::paginate(5))
-            ->with('status','Tag '.$newTag->name . ' created.');
-        } else {
-            return redirect()->route('admin.tags.index', Tag::paginate(5))
-            ->with('statusError','Tag '.$data['name'] . ' already exist.');
-        }
+        $newTag = new Tag();
+        $newTag->fill($data);
+        $newTag->slug = Post::createSlug($newTag->name,'tag');
+        $newTag->save();
+        // dd($newTag);
+        return redirect()->route('admin.tags.index', Tag::paginate(5))
+        ->with('status','Tag '.$newTag->name . ' created.');
     }
 
     /**
@@ -102,13 +89,12 @@ class TagController extends Controller
         // dd($request,$tag);
         $data = $request->all();
         $validate = $request->validate([
-            'name' => 'required | alpha_dash | max:240'
+            'name' => 'required | alpha_dash | max:240 |unique:App\Model\Tag,name'
         ]);
 
-        if($data['name'] !== $tag->name) {
-            $tag->name = $data['name'];
-            $tag->slug = Post::createSlug($data['name'],'tag');
-        }
+        $tag->name = $data['name'];
+        $tag->slug = Post::createSlug($data['name'],'tag');
+
         $tag->update($data);
 
         return redirect()
