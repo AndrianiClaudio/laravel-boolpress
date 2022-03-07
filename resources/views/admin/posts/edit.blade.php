@@ -4,13 +4,11 @@
 <div class="container-fluid">
   <div class="row  w-75 mx-auto ">
     <div class="col card p-3">
-        <div class="row">
-            <h2>Edit {{$post->title}}</h2>
+        <h2>Edit {{$post->title}}</h2>
             
-            {{-- @if(!empty($post->photo->path))
-            <img class="img img-fluid" src="{{asset('storage/'.$post->photo->path)}}" alt="">
-            @endif --}}
-        </div>
+        @if(!empty($post['image']))
+            <img class="img img-fluid" src="{{asset('storage/'.$post['image'])}}" alt="{{$post['title']}}">
+        @endif
         <form action="{{ route('admin.posts.update',$post->slug) }}" method="POST"  enctype="multipart/form-data">
             @csrf
             @method('PATCH')
@@ -33,13 +31,9 @@
             {{-- TAG SELECT --}}
             @php
             $oldTags = [];
-            // dd($post->tag()->get());
             foreach ($post->tag()->get()->toArray() as $value) {
                 $oldTags[] = $value['pivot']['tag_id'] - 1;
-                // dd($post->tag()->get()[0]);
-                // dd($post->tag()->get()[1]);
             }
-            // dd($oldTags);
             @endphp
             <div class="mb-3">
                 @foreach ($tags as $i => $tag)

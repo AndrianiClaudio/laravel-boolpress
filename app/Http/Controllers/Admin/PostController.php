@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Model\Category;
 use App\Model\Tag;
 use Illuminate\Support\Facades\Storage;
-use App\Model\Photo;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -132,7 +131,7 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
-                'photo' => 'nullable'
+                'photo' => 'nullable|image'
                 ]);
 
         $changes = [false, false, false];
@@ -150,31 +149,16 @@ class PostController extends Controller
             $post->category_id = $data['category_id'];
             $changes[2] = true;
         }
-        
 
-        $post->update();
-        
-        // dd($post->photo->path)
+
+        // dd($data['photo']);
         if(!empty($data['photo'])) {
-            // dd($data['photo']);
-            dd($post->photo->path);
-            Storage::delete($post->photo->path);
-            // dd($data['photo']);
+            Storage::delete($post->image);
             $img_path = Storage::put('uploads/posts', $data['photo']);
-            $post->photo->path = $img_path;
-            // $post->save();
-            // $image = $post->photo()->first();
-            // $image->path = $img_path;
-            // $image->slug = Str::slug(explode('/',$img_path)[2].'_'.$newPost->slug,'-');
-            // $image->update();
-            // $newImage = new Photo();
-            // $newImage->path = $img_path;
-            // $newImage->slug = Str::slug(explode('/',$img_path)[2].'_'.$newPost->slug,'-');
-            // $newImage->post_id = $newPost->id;
-            // $newImage->save();
-            // dd($newImage);
+            $post['image'] = $img_path;
         }
-  
+        
+        $post->update();
 
         $tags = [];
         foreach ($data as $key => $value) {

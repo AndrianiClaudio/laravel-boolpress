@@ -18,7 +18,7 @@
         <div class="card-title ml-4 mt-2">
 
 
-          @if(!empty($post['image']))
+          @if(!empty($post->image))
           <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
           @endif
 
