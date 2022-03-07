@@ -47,7 +47,8 @@ class TagController extends Controller
         $newTag->fill($data);
         $newTag->slug = Post::createSlug($newTag->name,'tag');
         $newTag->save();
-        // dd($newTag);
+        
+        
         return redirect()->route('admin.tags.index', Tag::paginate(5))
         ->with('status','Tag '.$newTag->name . ' created.');
     }
@@ -62,7 +63,8 @@ class TagController extends Controller
     {
         $tagName = $tag->name;
         $posts = $tag->post()->orderBy('updated_at','desc')->paginate(5);
-        // dd($tag,$tagName);
+        
+        
         return view('admin.tags.show',['posts' => $posts,'tagName' => $tagName]);
     }
 

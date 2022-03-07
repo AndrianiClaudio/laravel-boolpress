@@ -39,14 +39,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $newCategory = new Category;
         $data = $request->all();
-
+        
         // VALIDAZIONE
         $validate = $request->validate([
-            'name' => 'required | max:240'
+            'name' => 'required | max:240 | unique:App\Model\Category,name'
         ]);
-
+        
+        $newCategory = new Category;
         $newCategory->fill($data);
         $newCategory->slug = Post::createSlug($newCategory->name,'category');
         $newCategory->save();
@@ -95,13 +95,12 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $validate = $request->validate([
-            'name' => 'required | max:240'
+            'name' => 'required | max:240 | unique:App\Model\Category,name'
         ]);
 
-        if($data['name'] != $category->name) {
-            $category->name = $data['name'];
-            $category->slug = Post::createSlug($data['name'],'category');
-        }
+        $category->name = $data['name'];
+        $category->slug = Post::createSlug($data['name'],'category');
+        
         $category->update($data);
 
         return redirect()
