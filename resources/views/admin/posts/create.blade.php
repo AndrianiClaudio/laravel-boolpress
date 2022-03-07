@@ -29,29 +29,31 @@
                 @enderror
             </div>
             {{-- TAG SELECT --}}
-            @php
+            {{-- @php
                 $oldTags = [];
                 foreach (session()->getOldInput() as $key => $value) {
                     if(str_starts_with($key,'tag_id')) {
                         $oldTags[] = $value - 1;
                     }
                 }
-            @endphp
-            <div class="mb-3">
-                @foreach ($tags as $i => $tag)
+            @endphp --}}
+            <fieldset class="mb-3">
+                <legend>Tags</legend>
+                @foreach ($tags as $tag)
                     <div class="form-check-inline">
                         <input class="form-check-input"
-                        @if (in_array($i,$oldTags))
-                        checked
+                        @if (in_array($tag->id,old('tags',[])))
+                            checked
                         @endif
-                        type="checkbox" value="{{$tag->id}}" id="flexCheckDefault-{{$i}}" name="tag_id-{{$i}}"
+                        type="checkbox" value="{{$tag->id}}"  name="tags[]"
                         >
-                        <label class="form-check-label" for="flexCheckDefault-{{$i}}">
+                        <label class="form-check-label" for="flexCheckDefault">
                             {{$tag->name}}
                         </label>
                     </div>
                 @endforeach
-            </div>
+            </fieldset>
+            
             {{-- TITLE --}}
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

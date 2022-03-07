@@ -27,30 +27,25 @@
                     </div>
                 @enderror
             </div>
-            
             {{-- TAG SELECT --}}
-            @php
-            $oldTags = [];
-            foreach ($post->tag()->get()->toArray() as $value) {
-                $oldTags[] = $value['pivot']['tag_id'] - 1;
-            }
-            @endphp
-            <div class="mb-3">
-                @foreach ($tags as $i => $tag)
-                <div class="form-check-inline">
-                    <input class="form-check-input"
-                    @if (in_array($i,$oldTags))
-                    checked
-                    @endif
-                    type="checkbox" value="{{$tag->id}}" id="flexCheckDefault-{{$i}}" name="tag_id-{{$i}}"
-                    >
-                    <label class="form-check-label" for="flexCheckDefault-{{$i}}">
-                        {{$tag->name}}
-                    </label>
-                </div>
+            <fieldset class="mb-3">
+                <legend>Tags</legend>
+                @foreach ($tags as $tag)
+                    <div class="form-check-inline">
+                        <input class="form-check-input"
+                        @if (in_array($tag->id,old('tags',[])))
+                            checked
+                        @endif
+                        type="checkbox" value="{{$tag->id}}"  name="tags[]"
+                        >
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{$tag->name}}
+                        </label>
+                    </div>
                 @endforeach
-            </div>
-                    
+            </fieldset>
+
+            
             {{-- EDIT POST TITLE --}}
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

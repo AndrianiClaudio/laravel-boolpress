@@ -52,16 +52,10 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
+                'tags.*' => 'nullable|exists:App\Model\Tag,id',
                 'photo' => 'nullable|image'
                 ]
             );
-        // SPLIT & GET TAGS
-        $tags = [];
-        foreach ($data as $key => $value) {
-            if(str_starts_with($key,'tag_id')) {
-                $tags[] = $value;
-            }
-        }
         
         // CREATE NEW POST
         $newPost = new Post();
@@ -78,8 +72,7 @@ class PostController extends Controller
         }
         $newPost->save();
 
-
-        Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
+        $newPost->tag()->attach($data['tags']);
         
         return redirect()->route('admin.posts.show', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
@@ -103,11 +96,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-
-
-
         $tags = Tag::all();
-        // dd($post->tag(), $tags);
         $categories = Category::all();
         return view('admin.posts.edit',[
             'post' => $post,
@@ -131,6 +120,7 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
+                'tags.*' => 'nullable|exists:App\Model\Tag,id',
                 'photo' => 'nullable|image'
                 ]);
 
@@ -151,7 +141,6 @@ class PostController extends Controller
         }
 
 
-        // dd($data['photo']);
         if(!empty($data['photo'])) {
             Storage::delete($post->image);
             $img_path = Storage::put('uploads/posts', $data['photo']);
@@ -159,17 +148,7 @@ class PostController extends Controller
         }
         
         $post->update();
-
-        $tags = [];
-        foreach ($data as $key => $value) {
-            if(str_starts_with($key,'tag_id')) {
-                $tags[] = $value;
-            }
-        }
-        // $tags = $post->tag()->get();
-        
-        Post::where('slug', $post->slug)->first()->tag()->sync($tags);
-
+        $post->tag()->sync($data['tags']);
         return redirect()
             ->route('admin.posts.show', $post->slug)
             ->with('status', 'Post '. $post->title .' updated.');

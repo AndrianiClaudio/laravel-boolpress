@@ -5,20 +5,20 @@
   <div class="row">
     {{-- MESSAGGIO REDIRECT STATUS --}}
     @if (session('statusError'))
-    <div class="col-6 mx-auto">
-      <div class="alert alert-danger mx-auto">
-        {{ session('statusError') }}
+      <div class="col-6 mx-auto">
+        <div class="alert alert-danger mx-auto">
+          {{ session('statusError') }}
+        </div>
       </div>
-    </div>
     {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     @endif
     @if (session('status'))
-    <div class="col-6 mx-auto">
-      <div class="alert alert-success mx-auto">
-        {{ session('status') }}
+      <div class="col-6 mx-auto">
+        <div class="alert alert-success mx-auto">
+          {{ session('status') }}
+        </div>
       </div>
-    </div>
-    {{-- FINE MESSAGGIO REDIRECT STATUS --}}
+      {{-- FINE MESSAGGIO REDIRECT STATUS --}}
     @endif
     <div class="col-12">
       <h1 class="text-center">POSTS</h1>
@@ -32,7 +32,7 @@
           
 
           @if(!empty($post['image']))
-          <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
+            <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
           @endif
 
           <h4 class="card-tile mb-2">{{$post->title}}</h4>
