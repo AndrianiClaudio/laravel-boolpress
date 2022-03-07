@@ -23,6 +23,9 @@
         @php $postMany = $posts->items()[$key]; @endphp
         <div class="card w-75 mx-auto text-center mb-3">
           <div class="card-title ml-4 mt-2">
+            @if(!empty($postMany->photo->path))
+              <img class="img img-fluid" src="{{asset('storage/'.$postMany->photo->path)}}" alt="{{$post['title']}}">
+            @endif
             <h2><b>Title: </b>{{$post['title']}}</h2>
           </div>
           <div class="card-body pt-0">

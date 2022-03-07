@@ -74,7 +74,7 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
         $tagName = $tag->name;
-        $posts = $tag->post()->paginate(5);
+        $posts = $tag->post()->orderBy('updated_at','desc')->paginate(5);
         // dd($tag,$tagName);
         return view('admin.tags.show',['posts' => $posts,'tagName' => $tagName]);
     }
