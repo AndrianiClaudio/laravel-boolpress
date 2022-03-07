@@ -66,7 +66,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $categoryName = $category->name;
-        $posts = Post::orderBy('updated_at','desc')->where('category_id', $category->id)->paginate(5);
+        $posts = $category->posts()->orderBy('updated_at','desc')->where('category_id', $category->id)->paginate(5);
         return view('admin.categories.show', ['posts' => $posts,'categoryName' => $categoryName]);
         
     }

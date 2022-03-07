@@ -149,7 +149,11 @@ class PostController extends Controller
         
         $post->update();
         // tags
-        $post->tag()->sync($data['tags']);
+        if((isset($data['tags']))) {
+            $post->tag()->sync($data['tags']);
+        } else {
+            $post->tag()->detach();
+        }
 
         return redirect()
             ->route('admin.posts.show', $post->slug)
