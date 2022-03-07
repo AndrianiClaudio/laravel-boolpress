@@ -20,11 +20,22 @@
     <div class="cards w-100 mx-auto">
       @foreach ($posts as $post)
       <div class="card w-75 mx-auto text-center mb-3">
-        <div class="card-body">
-          
+        <div class="card-body position-relative">
+          {{-- DELETE POST --}}
+          <form class="position-absolute fixed-top text-right" action="{{ route('admin.posts.destroy', $post) }}" method="post" title="delete">
+              @csrf
+              @method('DELETE')
+              {{-- <input class="btn btn-danger" type="submit" value="Delete"> --}}
+              <button class="btn" type="submit">
+                <i class="d-block ml-auto bi bi-trash"></i>
+              </button>
+          </form>
 
+          {{-- @dd($post['image']) --}}
           @if(!empty($post['image']))
             <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
+          @else
+            <img class="img img-fluid" src="https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg" alt="{{$post->title}}">
           @endif
 
           <h4 class="card-tile mb-2">{{$post->title}}</h4>
@@ -52,12 +63,7 @@
 
             {{-- EDIT POST --}}
             <a class="btn btn-info ml-2" href="{{ route('admin.posts.edit', $post) }}">Modify</a>
-            {{-- DELETE POST --}}
-            <form class="ml-2" action="{{ route('admin.posts.destroy', $post) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+
           </div>
         </div>
       </div>

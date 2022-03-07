@@ -32,7 +32,6 @@
             onclick="event.preventDefault();
             document.getElementById('delete-form').submit();">Delete</a>
             {{-- DELETE TAG --}}
-                              
             <form class="ml-2 d-none" id="delete-form" action="{{ route('admin.tags.destroy', $tag->slug) }}" method="post">
                 @csrf
                 @method('DELETE')
