@@ -23,9 +23,9 @@
           <div class="card w-75 mx-auto text-center mb-3">
             <div class="card-title ml-4 mt-2">
 
-              @if(!empty($categoryMany->photo->path))
+              {{-- @if(!empty($categoryMany->photo->path))
                 <img class="img img-fluid" src="{{asset('storage/'.$categoryMany->photo->path)}}" alt="{{$post['title']}}">
-              @endif
+              @endif --}}
               <h2><b>Title: </b>{{$post['title']}}</h2>
             </div>
             <div class="card-body pt-0">

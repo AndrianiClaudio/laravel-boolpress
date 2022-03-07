@@ -31,9 +31,9 @@
         <div class="card-body">
           
 
-          @if(!empty($post->photo->path))
+          {{-- @if(!empty($post->photo->path))
             <img class="img img-fluid" src="{{asset('storage/'.$post->photo->path)}}" alt="{{$post->title}}">
-          @endif
+          @endif --}}
 
           <h4 class="card-tile mb-2">{{$post->title}}</h4>
           <h5 class="card-subtitle mb-2 text-muted"><b>Author: </b>{{$post->user()->first()->name}}</h5>

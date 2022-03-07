@@ -4,8 +4,14 @@
 <div class="container-fluid">
   <div class="row  w-75 mx-auto ">
     <div class="col card p-3">
-        <h2>Edit {{$post->title}}</h2>
-        <form action="{{ route('admin.posts.update',$post->slug) }}" method="POST">
+        <div class="row">
+            <h2>Edit {{$post->title}}</h2>
+            
+            {{-- @if(!empty($post->photo->path))
+            <img class="img img-fluid" src="{{asset('storage/'.$post->photo->path)}}" alt="">
+            @endif --}}
+        </div>
+        <form action="{{ route('admin.posts.update',$post->slug) }}" method="POST"  enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             {{-- EDIT CATEGORY --}}
@@ -74,7 +80,16 @@
                 @enderror
             </div>
             
-
+            {{-- EDIT UPLOAD --}}
+            <div class="mb-3">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" name="photo" value="">
+                @error('photo')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             
             <input class="btn btn-primary" type="submit" value="Salva">
         </form>

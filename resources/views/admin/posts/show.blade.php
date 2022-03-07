@@ -18,10 +18,8 @@
         <div class="card-title ml-4 mt-2">
 
 
-          @if(!empty($post->photo->path))
-            <img class="img img-fluid" src="{{asset('storage/'.$post->photo->path)}}" alt="{{$post->title}}">
-            {{-- @dd(asset('storage/'.$post->photo)) --}}
-            {{-- @dd($post->photo) --}}
+          @if(!empty($post['image']))
+          <img class="img img-fluid" src="{{asset('storage/'.$post->image)}}" alt="{{$post->title}}">
           @endif
 
           <h2><b>Title: </b>{{$post->title}}</h2>

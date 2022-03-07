@@ -47,10 +47,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($data['photo']);
-
-        // dd($img_path);
-        
         // VALIDATE
         $validate = $request->validate(
             [
@@ -76,34 +72,16 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->user_id = Auth::id();
         $newPost->slug = Post::createSlug($data['title'],'post');
-        // // dd(explode('/',$img_path)[2]);
-
-        // // dd($newImage->slug);
-
-        //    // dd($data);
-        $newPost->save();
-
-        
-        
-
 
         if(!empty($data['photo'])) {
             $img_path = Storage::put('uploads/posts', $data['photo']);
-            $newPost['photo'] = $img_path;
-            $newImage = new Photo();
-            $newImage->path = $img_path;
-            $newImage->slug = Str::slug(explode('/',$img_path)[2].'_'.$newPost->slug,'-');
-            $newImage->post_id = $newPost->id;
-            $newImage->save();
+            $newPost['image'] = $img_path;
         }
+        $newPost->save();
 
-        
 
-             
         Post::where('slug', $newPost->slug)->first()->tag()->attach($tags);
         
-
-
         return redirect()->route('admin.posts.show', $newPost->slug)->with('status','Post '.$newPost->title . ' created.');
     }
 
@@ -126,6 +104,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
+
+
         $tags = Tag::all();
         // dd($post->tag(), $tags);
         $categories = Category::all();
@@ -150,7 +131,8 @@ class PostController extends Controller
             [
                 'title' => 'required|max:255',
                 'content' => 'required',
-                'category_id' => 'exists:App\Model\Category,id'
+                'category_id' => 'exists:App\Model\Category,id',
+                'photo' => 'nullable'
                 ]);
 
         $changes = [false, false, false];
@@ -169,7 +151,30 @@ class PostController extends Controller
             $changes[2] = true;
         }
         
-        $post->update($data);
+
+        $post->update();
+        
+        // dd($post->photo->path)
+        if(!empty($data['photo'])) {
+            // dd($data['photo']);
+            dd($post->photo->path);
+            Storage::delete($post->photo->path);
+            // dd($data['photo']);
+            $img_path = Storage::put('uploads/posts', $data['photo']);
+            $post->photo->path = $img_path;
+            // $post->save();
+            // $image = $post->photo()->first();
+            // $image->path = $img_path;
+            // $image->slug = Str::slug(explode('/',$img_path)[2].'_'.$newPost->slug,'-');
+            // $image->update();
+            // $newImage = new Photo();
+            // $newImage->path = $img_path;
+            // $newImage->slug = Str::slug(explode('/',$img_path)[2].'_'.$newPost->slug,'-');
+            // $newImage->post_id = $newPost->id;
+            // $newImage->save();
+            // dd($newImage);
+        }
+  
 
         $tags = [];
         foreach ($data as $key => $value) {

@@ -29,9 +29,7 @@ class Post extends Model
     public function tag() {
         return $this->belongsToMany('App\Model\Tag');
     }
-    public function photo() {
-        return $this->hasOne('App\Model\Photo');
-    }
+
     public function getRouteKeyName()
     {
         return 'slug';
