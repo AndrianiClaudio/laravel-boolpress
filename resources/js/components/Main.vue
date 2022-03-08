@@ -1,7 +1,6 @@
 <template>
-  <main class="main p-4">
-    <div class="row row-cols-1 row-cols-md-4 row-cols-lg-8 row-gap-3">
-      <div class="py-2" v-for="(post,index) in posts" :key="`post-${index}`">
+    <div class="row g-0 row-cols-1 row-cols-md-4 row-cols-lg-8">
+      <div class="p-3" v-for="(post,index) in posts" :key="`post-${index}`">
         <div class="card h-100">
           <div class="card-body">
             <h2 class="card-title">{{post.title}}</h2>
@@ -18,14 +17,13 @@
               </em>
             </p>
             <hr class="bg-primary">
-            <div v-if="post.tags.length > 0" class="container">
+            <div v-if="post.tags" class="container">
               <span v-for="tag in post.tags" :key="`${tag}`" class="badge fs-6 rounded-pill bg-secondary me-3">#{{tag}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
 </template>
 
 <script>
@@ -40,6 +38,7 @@ export default {
     axios.get('http://127.0.0.1:8000/api/posts')
     .then((res) => {
       this.posts = res.data.results.posts;
+      console.log(res.data.results.posts);
     });
   }
 }

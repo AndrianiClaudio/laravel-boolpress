@@ -15,9 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::paginate(8);
         $posts = Post::all();
+        // $posts = Post::all();
         // dd($posts->toArray());
+        // dd($posts);
         foreach ($posts as $post) {
             $tags = [];
             $post['author'] = $post->user()->first()->name;
@@ -102,3 +103,4 @@ class PostController extends Controller
         //
     }
 }
+

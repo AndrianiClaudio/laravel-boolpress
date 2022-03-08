@@ -10,7 +10,8 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/front.js') }}" defer></script>
+    @yield('scripts')
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,12 +20,57 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @yield('content')
-        {{-- @include('partials.header')
-        
-        <main class="py-4">
-        </main> --}}
-    </div>
+    <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-light" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon border-light"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                {{-- <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul> --}}
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <input type="submit" value="Logout" class="btn btn-default">
+                            </form>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="py-4">
+        <div id="app">
+
+            @yield('content')
+            
+            {{-- @include('partials.header')
+            
+            <main class="py-4">
+            </main> --}}
+        </div>
+    </main>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <template>
-<nav class="navbar navbar-light bg-primary">
+<div>
+<!-- <nav class="navbar navbar-light bg-primary">
   <div class="container">
-    <a class="navbar-brand text-white" href="..">Boolpress</a>
+    <a class="navbar-brand text-white" href="/login">Boolpress</a> -->
     <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> -->
@@ -12,15 +13,19 @@
         </li>
       </ul>
     </div> -->
-  </div>
-</nav>
+  <!-- </div>
+</nav> -->
+
+</div>
 </template>
 
 <script>
   export default {
     name: "Header",
     data() {
-      
+      return {
+
+      }
     }
   }
 </script>

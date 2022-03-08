@@ -6,12 +6,12 @@ id="navbar-header">
         {{-- LOGO --}}
         <a class="d-block navbar-brand text-success font-weight-bold text-uppercase text-info logo" href="{{route('admin.home')}}">{{config('app.name')}}</a>
         
-        @if(Auth::Check())
         <div class="d-flex justify-content-end align-items-center">
-            <a href="default">
+            <a href="/">
                 {{-- Go to front office page --}}
                 All post
             </a>
+            @if(Auth::Check())
             {{-- LOGOUT D-MD-NONE --}}
             <a class="d-md-none nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

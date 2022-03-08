@@ -1,4 +1,4 @@
-@if(Auth::check())
+{{-- @if(Auth::check()) --}}
 <nav class="navbar d-block bg-light sidebar position-sticky sticky-top" id="sidebarMenu">
     <ul class="nav flex-column">
         {{-- DASHBOARD --}}
@@ -77,4 +77,4 @@
         </li>
     </ul>
 </nav>
-@endif
+{{-- @endif --}}

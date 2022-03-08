@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/posts', 'Guest\PostController@index')->name('guest.posts.index');
+// Route::get('/posts/{post}', 'Guest\PostController@show')->name('guest.posts.show');
+
+
 Auth::routes();
 
 
@@ -35,4 +39,4 @@ Route::middleware('auth')
 
 Route::get("{any?}", function ($name = null) {
   return view("guest.home");
-})->where("any", ".*")->name('default');
+})->where("any", ".*");
