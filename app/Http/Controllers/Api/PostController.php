@@ -20,6 +20,7 @@ class PostController extends Controller
         // dd($posts->toArray());
         foreach ($posts as $post) {
             $tags = [];
+            $post['author'] = $post->user()->first()->name;
             $post['category'] = $post->category()->first()->name;
             foreach ($post->tag()->get()->toArray() as $tag) {
                 $tags[] = $tag['name'];
