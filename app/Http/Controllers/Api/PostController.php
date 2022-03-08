@@ -14,13 +14,8 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
-
-
-
-        // $posts = Post::all();
-        $posts = Post::paginate(8);
+    {   // $posts = Post::all();
+        $posts = Post::orderBy('updated_at','desc')->paginate(8);
         // $posts = Post::all();
         // dd($posts->toArray());
         // dd($posts['next_page_url']);
