@@ -15,10 +15,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+
+
+
+
+        // $posts = Post::all();
+        $posts = Post::paginate(8);
         // $posts = Post::all();
         // dd($posts->toArray());
-        // dd($posts);
+        // dd($posts['next_page_url']);
         foreach ($posts as $post) {
             $tags = [];
             $post['author'] = $post->user()->first()->name;
@@ -32,6 +37,7 @@ class PostController extends Controller
             'response' => 'true',
             'results' => [
                 'posts' => $posts,
+                
             ]
         ]);
         // dd('Api Post controller --- index');

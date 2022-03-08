@@ -1,5 +1,6 @@
 <template>
-    <div class="row g-0 row-cols-1 row-cols-md-4 row-cols-lg-8">
+<div class="container-fluid">
+  <div class="row px-3 g-0 row-cols-1 row-cols-md-3 row-cols-lg-4">
       <div class="p-3" v-for="(post,index) in posts" :key="`post-${index}`">
         <div class="card h-100">
           <div class="card-body">
@@ -22,8 +23,26 @@
             </div>
           </div>
         </div>
-      </div>
+
     </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+        <!-- page links prev & next  -->
+        <div class="btn-group mt-4" role="group">
+          <button v-if="prev_page_url" type="button" class="btn btn-light border-primary rounded-pill me-2" @click="setPage('prev_page_url')">
+              Prev
+          </button>
+          <button v-if="next_page_url" type="button" class="btn btn-light border-primary rounded-pill" @click="setPage('next_page_url')">
+              Next
+          </button>
+        </div>
+    </div>
+  </div>
+</div>
+  
+
+
 </template>
 
 <script>
@@ -32,14 +51,37 @@ export default {
   data() {
     return {
       posts: [],
+      next_page_url: null,
+      prev_page_url: null,
+    }
+  },
+  methods: {
+    getPosts(url) {
+      axios.get(url)
+      .then((res) => {
+        this.posts = res.data.results.posts.data;
+        // console.log(this.posts);
+        this.next_page_url = res.data.results.posts.next_page_url;
+        this.prev_page_url = res.data.results.posts.prev_page_url;
+        // console.log(res.data.results.posts.next_page_url);
+      });
+    },
+    setPage(url) { 
+      if(this[url]) {
+        this.getPosts(this[url]);
+      }
     }
   },
   created() {
-    axios.get('http://127.0.0.1:8000/api/posts')
-    .then((res) => {
-      this.posts = res.data.results.posts;
-      console.log(res.data.results.posts);
-    });
+    this.getPosts('http://127.0.0.1:8000/api/posts');
+    // axios.get('http://127.0.0.1:8000/api/posts')
+    // .then((res) => {
+    //   this.posts = res.data.results.posts.data;
+    //   // console.log(this.posts);
+    //   this.next_page_url = res.data.results.posts.next_page_url;
+    //   this.prev_page_url = res.data.results.posts.prev_page_url;
+    //   // console.log(res.data.results.posts.next_page_url);
+    // });
   }
 }
 </script>
