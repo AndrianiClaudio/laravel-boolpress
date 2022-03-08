@@ -23,26 +23,35 @@
     {{-- DATI CATEGORIES --}}
       
     {{-- STAMPA DATI POST --}}
-    <div class="cards mx-auto">
+    <div class="cards w-75 mx-auto d-flex flex-column align-items-center">
       @foreach ($categories as $category)
       <div class="card text-center mb-3 p-3">
         <div class="card-body">
-          <h4 class="card-title">{{$category->name}}</h4>
+          <h4 class="card-title h3 text-uppercase">
+            <a class="text-decoration-none text-primary" href="{{route('admin.categories.show',$category)}}">
+              <em>
+                {{$category->name}}
+              </em>
+            </a>
+          </h4>
           <h5 class="card-subtitle mb-2 text-muted"><b>Created: </b>{{$category->created_at}}</h5>
-          <div class="row justify-content-center ">
-            {{-- VIEW POST --}}
-            <a class="btn btn-info" href="{{ route('admin.categories.show', $category->slug) }}">View</a>
-            @if($category->slug !== 'generic')
-                {{-- EDIT POST --}}
-                <a class="btn btn-info ml-2" href="{{ route('admin.categories.edit', $category->slug) }}">Modify</a>
-                {{-- DELETE POST --}}
-                <form class="ml-2" action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input class="btn btn-danger" type="submit" value="Delete">
-                </form>
-            @endif
-          </div>
+          
+          @if($category->slug !== 'generic')
+            <div class="d-flex justify-content-center">
+              {{-- EDIT POST --}}
+              <a class="btn ms-2 text-success" href="{{ route('admin.categories.edit', $category->slug) }}"><i class="bi bi-pen"></i></a>
+              {{-- DELETE POST --}}
+              <form class="ms-2" action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn" type="submit">
+                    <i class="d-block bi bi-trash text-danger"></i>
+                  </button>
+              </form>
+            </div>
+          @endif
+
+
         </div>
       </div>
       @endforeach

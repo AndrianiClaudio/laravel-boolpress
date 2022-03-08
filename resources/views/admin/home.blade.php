@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col">
                 <div class="card w-75 mx-auto">
-                    <div class="card-title ml-4 my-2 text-primary">
+                    <div class="card-title ms-4 my-2 text-primary">
                         <h1>
                             Welcome {{ Auth::user()->name }}
                         </h1>

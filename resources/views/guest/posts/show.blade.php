@@ -17,7 +17,7 @@
         @endif
         <div class="col">
           <div class="card">
-            <div class="card-title ml-4">
+            <div class="card-title ms-4">
               <h2>{{$post->title}}</h2>
             </div>
             <div class="card-body">

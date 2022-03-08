@@ -1,15 +1,8 @@
-@php
-    $path = Auth::check() ? 'admin' : 'app';
-@endphp
-
-@extends('layouts/' . $path)
+@extends('layouts.app')
 
 
 @section('content')
-    <div class="container">
-      @guest
-        <h1 class="text-alert">Effettua il login o registrati!!</h1>
-        @else
-      @endguest
-    </div>
+  {{-- <script src="{{ asset('js/front.js') }}" defer></script> --}}
+  <div id="app">
+  </div>
 @endsection

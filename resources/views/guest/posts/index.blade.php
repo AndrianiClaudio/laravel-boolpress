@@ -44,9 +44,9 @@
             </a>
             @if(Auth::check() && Auth::user()->id === $post->user_id)
               {{-- EDIT POST --}}
-              <a class="btn btn-info ml-2" href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
+              <a class="btn btn-info ms-2" href="{{ route('admin.posts.edit', $post->slug) }}">Modify</a>
               {{-- DELETE POST --}}
-              <form class="ml-2" action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
+              <form class="ms-2" action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
                   @csrf
                   @method('DELETE')
                   <input class="btn btn-danger" type="submit" value="Delete">
