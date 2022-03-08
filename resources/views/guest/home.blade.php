@@ -2,7 +2,7 @@
 
 
 @section('content')
-  {{-- <script src="{{ asset('js/front.js') }}" defer></script> --}}
-  <div id="app">
-  </div>
+<div class="container">
+  HOME
+</div>
 @endsection

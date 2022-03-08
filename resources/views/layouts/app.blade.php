@@ -10,7 +10,6 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{ asset('js/front.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,12 +19,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    {{-- <div id="app"> --}}
-        @include('partials.header')
+    <div id="app">
+        @yield('content')
+        {{-- @include('partials.header')
         
         <main class="py-4">
-            @yield('content')
-        </main>
-    {{-- </div> --}}
+        </main> --}}
+    </div>
 </body>
 </html>
