@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function() {
-//     return view('guest.home');
-// })->name('guest.home');
-
-
-// Route::get('/posts', 'Guest\PostController@index')->name('guest.posts.index');
-// Route::get('/posts/{post}', 'Guest\PostController@show')->name('guest.posts.show');
-
-
 Auth::routes();
 
 

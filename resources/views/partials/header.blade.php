@@ -4,11 +4,12 @@
 id="navbar-header">
     <div class="container-fluid px-3">
         {{-- LOGO --}}
-        <a class="d-block navbar-brand text-success font-weight-bold text-uppercase text-info logo" href="{{route('default')}}">{{config('app.name')}}</a>
+        <a class="d-block navbar-brand text-success font-weight-bold text-uppercase text-info logo" href="{{route('admin.home')}}">{{config('app.name')}}</a>
         
         @if(Auth::Check())
         <div class="d-flex justify-content-end align-items-center">
-            <a href="{{route('guest.posts.index')}}">
+            <a href="default">
+                {{-- Go to front office page --}}
                 All post
             </a>
             {{-- LOGOUT D-MD-NONE --}}

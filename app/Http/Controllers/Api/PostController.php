@@ -29,7 +29,9 @@ class PostController extends Controller
         }
         return response()->json([
             'response' => 'true',
-            'results' => $posts
+            'results' => [
+                'posts' => $posts,
+            ]
         ]);
         // dd('Api Post controller --- index');
     }
