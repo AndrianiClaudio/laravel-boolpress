@@ -17,7 +17,15 @@ class PostController extends Controller
     {
         // $posts = Post::paginate(8);
         $posts = Post::all();
-
+        // dd($posts->toArray());
+        foreach ($posts as $post) {
+            $tags = [];
+            $post['category'] = $post->category()->first()->name;
+            foreach ($post->tag()->get()->toArray() as $tag) {
+                $tags[] = $tag['name'];
+            }
+            $post['tags'] = $tags;
+        }
         return response()->json([
             'response' => 'true',
             'results' => $posts

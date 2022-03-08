@@ -1,6 +1,6 @@
 <template>
   <main class="main py-4">
-    <div class="row row-cols-1 row-cols-md-4 row-gap-3">
+    <div class="row row-cols-1 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-gap-3">
       <div class="py-2" v-for="(post,index) in posts" :key="`post-${index}`">
         <div class="card h-100">
           <div class="card-body">
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       posts: [],
-
+      tags: [],
     }
   },
   created() {
