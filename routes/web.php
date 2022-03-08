@@ -21,28 +21,27 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/posts', 'Guest\PostController@index')->name('guest.posts.index');
 // Route::get('/posts/{post}', 'Guest\PostController@show')->name('guest.posts.show');
 
+
 Auth::routes();
 
+
 Route::middleware('auth')
-    ->namespace('Admin')
-    ->name('admin.')
-    ->prefix('admin')
-    ->group(function () {
-        // HOME
-        Route::get('/',
-            'HomeController@index')
-            ->name('home');
-        // POSTS
-        Route::resource('posts', 'PostController');
-        // CATEGORIES
-        Route::resource('categories', 'CategoryController');
-        // TAGS
-        Route::resource('tags', 'TagController');
-        // PHOTOS
-        Route::resource('photos', 'PhotoController');
-    });
+->namespace('Admin')
+->name('admin.')
+->prefix('admin')
+->group(function () {
+    // HOME
+    Route::get('/',
+    'HomeController@index')
+    ->name('home');
+    // POSTS
+    Route::resource('posts', 'PostController');
+    // CATEGORIES
+    Route::resource('categories', 'CategoryController');
+    // TAGS
+    Route::resource('tags', 'TagController');
+});
 
-
-Route::get("{any?}", function () {
+Route::get("{any?}", function ($name = null) {
   return view("guest.home");
 })->where("any", ".*")->name('default');
