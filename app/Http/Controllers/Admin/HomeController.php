@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -11,7 +12,15 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index() {
-        return view('admin.home');
+    public function index()
+    {
+        // controllo se utente é loggato
+        if (Auth::check() && Auth::user()->roles()->get()->first()->name === 'admin') {
+            return view('admin.home');
+        }
+        else {
+            return view('guest.home');
+        // abort('403');
+        }
     }
 }

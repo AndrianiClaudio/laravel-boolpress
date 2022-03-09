@@ -8,19 +8,20 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Model\Role;
 
 class RegisterController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+     |--------------------------------------------------------------------------
+     | Register Controller
+     |--------------------------------------------------------------------------
+     |
+     | This controller handles the registration of new users as well as their
+     | validation and creation. By default this controller uses a trait to
+     | provide this functionality without requiring any additional code.
+     |
+     */
 
     use RegistersUsers;
 
@@ -64,10 +65,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+        $newUser = new User();
+        $newUser->name = $data['name'];
+        $newUser->email = $data['email'];
+        $newUser->password = Hash::make($data['password']);
+        $newUser->save();
+
+        $newRole = new Role();
+        $newRole->name = 'standard';
+        $newRole->user_id = $newUser->id;
+        $newRole->save();
+        return $newUser;
+    // $newRole->user_id = User::where('email', $data['email'])->get()->first()->id;
+    // dd($newUser);
+    // return User::create([
+    //     'name' => $data['name'],
+    //     'email' => $data['email'],
+    //     'password' => Hash::make($data['password']),
+    // ]);
     }
 }

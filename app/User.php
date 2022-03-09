@@ -43,7 +43,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Model\UserInfo');
     }
-    
+    // 1-1 with roles
+    public function roles()
+    {
+        return $this->hasOne('App\Model\Role');
+    }
+
     // 1-Many with posts
     public function posts()
     {
