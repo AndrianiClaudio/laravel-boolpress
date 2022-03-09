@@ -1,17 +1,17 @@
 <template>
 <div class="container-fluid">
-  <div class="row px-3 g-0 row-cols-1 row-cols-md-3 row-cols-lg-4">
+  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
     <div class="p-3" v-for="(post,index) in posts" :key="`post-${index}`">
       <div class="card h-100">
-        <!-- V-IF IMAGE NOT PRESENT OR HOVER ON CARD -->
+        <!-- POST IMAGE -->
+        <img :src="'/storage/'+post.image" class="card-img-top" :alt="post.title">
         <div 
-        v-if="!post.image || hover"
-        class="card-body  d-flex flex-column justify-content-between" @mouseleave="hover = false"
+        class="card-body  d-flex flex-column justify-content-between" 
         >
-          <!-- TITLE -->
+          <!-- TITLE, CATEGORY, AUTHOR -->
           <div class="row py-2">
             <div class="col">
-              <h2 class="card-title">{{post.title}}</h2>
+              <h2 class="card-title text-uppercase">{{post.title}}</h2>
               <div class="container-fluid g-0 d-flex justify-content-between">
                 <span class="text-info h5 text-uppercase" title="Category">{{post.category}}</span>
                 <span class="text-secondary h6">Created by: {{post.author}}</span>
@@ -34,10 +34,6 @@
               <span v-for="tag in post.tags" :key="`${tag}`" class="badge fs-6 rounded-pill bg-secondary me-3">#{{tag}}</span>
             </div>
           </div>
-        </div>
-        <!-- V-ELSE IF POST HAS IMAGE -->
-        <div v-else @mouseover="hover = true">
-          <img class="img img-fluid" :src="'/storage/'+post.image" alt="#">
         </div>
       </div>
     </div>
@@ -68,7 +64,6 @@ export default {
   data() {
     return {
       posts: [],
-      hover:false,
       next_page_url: null,
       prev_page_url: null,
     }
