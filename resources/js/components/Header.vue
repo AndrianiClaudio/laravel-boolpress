@@ -32,6 +32,10 @@
             {
                 name: 'Chi Siamo',
                 routeName: 'about'
+            },
+            {
+                name: 'Contatti',
+                routeName: 'contacts'
             }
           ]
         }

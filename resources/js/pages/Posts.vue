@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid">
   <!-- POSTS -->
-  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4">
     <div class="p-3" v-for="(post,index) in posts" :key="`post-${index}`">
       <div class="card h-100">
         <!-- POST IMAGE -->
@@ -14,7 +14,7 @@
             <div class="col">
               <!-- TITLE WITH LINK TO @SHOW -->
               <h2 class="card-title text-uppercase">
-                <a :href="`/posts/${post.id}`" class="text-decoration-none">{{post.title}}</a>
+                 <router-link class="text-decoration-none text-dark" :to="{ name: 'post', params: { id: post.id } }">{{post.title}}</router-link>
                 
               </h2>
               <div class="container-fluid g-0 d-flex justify-content-between">
@@ -80,7 +80,7 @@ export default {
         this.prev_page_url = res.data.results.prev_page_url;
 
 
-        console.log(this.posts);
+        // console.log(this.posts);
       });
     },
     // funzione per cambiare pagina 

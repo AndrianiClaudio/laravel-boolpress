@@ -13,7 +13,7 @@
             <div class="col">
               <!-- TITLE WITH LINK TO @SHOW -->
               <h2 class="card-title text-uppercase">
-                <a :href="`/posts/${post.id}`" class="text-decoration-none">{{post.title}}</a>
+                {{post.title}}
                 
               </h2>
               <div class="container-fluid g-0 d-flex justify-content-between">

@@ -51,4 +51,18 @@ class PostController extends Controller
             ]
         ]);
     }
+
+    public function inRandomOrder()
+    {
+        // dd('-------');
+        $posts = Post::inRandomOrder()->with('tag', 'category', 'user')->limit(4)->get();
+
+        return response()->json([
+            'response' => true,
+            'results' => [
+                'data' => $posts
+            ],
+        ]);
+    }
+
 }
