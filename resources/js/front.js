@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 // import pages
 import App from './views/App';
 import Home from './pages/Home.vue';
+import Post from './pages/Post.vue';
 import Posts from './pages/Posts.vue';
 import About from './pages/About.vue';
 import Contacts from './pages/Contacts.vue';
@@ -24,6 +25,13 @@ const router = new VueRouter({
             path: '/posts',
             name: 'posts',
             component: Posts,
+            
+        },
+        {
+            path: '/posts/:id',
+            name: 'post',
+            props:true,
+            component: Post,
             
         },
         {

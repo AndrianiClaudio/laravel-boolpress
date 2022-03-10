@@ -12,7 +12,11 @@
           <!-- TITLE, CATEGORY, AUTHOR -->
           <div class="row py-2">
             <div class="col">
-              <h2 class="card-title text-uppercase">{{post.title}}</h2>
+              <!-- TITLE WITH LINK TO @SHOW -->
+              <h2 class="card-title text-uppercase">
+                <a :href="`/posts/${post.id}`" class="text-decoration-none">{{post.title}}</a>
+                
+              </h2>
               <div class="container-fluid g-0 d-flex justify-content-between">
                 <span class="text-info h5 text-uppercase" title="Category">{{post.category.name}}</span>
                 <span class="text-secondary h6">Created by: {{post.user.name}}</span>
