@@ -9,6 +9,7 @@ import App from './views/App';
 import Home from './pages/Home.vue';
 import Post from './pages/Post.vue';
 import Posts from './pages/Posts.vue';
+import Category from './pages/Category.vue';
 import About from './pages/About.vue';
 import Contacts from './pages/Contacts.vue';
 
@@ -32,6 +33,13 @@ const router = new VueRouter({
             name: 'post',
             props:true,
             component: Post,
+            
+        },
+        {
+            path: '/categories/:id',
+            name: 'category',
+            props:true,
+            component: Category,
             
         },
         {

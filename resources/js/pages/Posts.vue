@@ -3,27 +3,6 @@
   <div class="row search mb-3 p-3 bg-light">
     <div class="col-12">
       <form>
-          <!-- <h2>Search</h2> -->
-          <!-- <div class="row">
-            <div class="mb-3 col-2">
-              Order By Column
-              <select class="form-select form-select" name="orderbycolumn" id="orderbycolumn"
-                  v-model="form.orderbycolumn">
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="created_at">Created</option>
-                <option value="updated_at">Updated</option>
-              </select>
-            </div>
-            <div class="mb-3 col-2">
-              Order By Versus
-              <select class="form-select form-select" name="orderbysort" id="orderbysort"
-                  v-model="form.orderbysort">
-                <option value="asc">Asc</option>
-                <option value="desc">Desc</option>
-              </select>
-            </div>
-          </div> -->
           <!-- SELECT CATEGORY-->
           <div class="row">
             <div class="col  mb-3 text-center">
