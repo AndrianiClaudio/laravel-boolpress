@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('script')
+    <script src="{{ asset('js/admin.js') }}" defer></script>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -14,15 +18,15 @@
                     <div class="card-body">
                         <h3>Your info</h3>
                         <div>
-                            Email :  {{ Auth::user()->email }}
+                            Email : {{ Auth::user()->email }}
                         </div>
                         <hr>
                         <div>
-                            Phone Number :  {{ Auth::user()->userInfo()->first()->phone }}
+                            Phone Number : {{ Auth::user()->userInfo()->first()->phone }}
                         </div>
                         <hr>
                         <div>
-                            Address :  {{ Auth::user()->userInfo()->first()->address }}
+                            Address : {{ Auth::user()->userInfo()->first()->address }}
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('scripts')
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,18 +24,18 @@
 
 <body>
     {{-- <div id="app"> --}}
-        @include('partials.header')
-        <main class="py-4">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-4 col-md-3 col-lg-2">
-                        @include('partials.main.leftBar')
-                    </div>
-                    <div class="col-8 col-md-9 col-lg-10">
-                        @yield('content')
-                    </div>
+    @include('partials.header')
+    <main class="py-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4 col-md-3 col-lg-2">
+                    @include('partials.main.leftBar')
                 </div>
-        </main>
+                <div class="col-8 col-md-9 col-lg-10">
+                    @yield('content')
+                </div>
+            </div>
+    </main>
     {{-- </div> --}}
 </body>
 
