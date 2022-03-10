@@ -80,7 +80,7 @@ export default {
         this.prev_page_url = res.data.results.prev_page_url;
 
 
-        // console.log(this.posts);
+        console.log(this.posts);
       });
     },
     // funzione per cambiare pagina 

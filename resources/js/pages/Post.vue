@@ -1,8 +1,8 @@
 <template>
 <div class="container-fluid">
   <!-- POSTS -->
-  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-      <div v-if="post" class="card h-100 p-3">
+  <div class="row-cols-1">
+      <div v-if="post" class="card h-100 mx-auto p-3">
         <!-- POST IMAGE -->
         <img v-if="post.image" :src="'/storage/'+post.image" class="card-img-top" :alt="post.title">
         <div 

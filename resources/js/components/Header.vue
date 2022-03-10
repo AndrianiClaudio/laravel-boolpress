@@ -5,10 +5,7 @@
     <div class="col d-flex justify-content-center">
       <ul class="list-inline">
         <li v-for="(item,index) in menu.items" :key="`item-${index}`" class="list-inline-item">
-          <button class="btn">
-            
-            <a :href="item.href" class="list-group-item list-group-item-action" :class="menu.selected === item.name ? 'selected' : ''" >{{item.name}}</a>
-          </button>
+          <router-link class="nav-link text-dark text-uppercase" :to="{ name: item.routeName}">{{ item.name }}</router-link>
         </li>
       </ul>
     </div>
@@ -22,20 +19,19 @@
     name: "Header",
     data() {
       return {
-      // logo: require('../../img/ ... '),
         menu: {
           items: [
             {
                 name: 'Home',
-                href: 'home'
+                routeName: 'home'
             },
             {
                 name: 'Post',
-                href: 'posts'
+                routeName: 'posts'
             },
             {
                 name: 'Chi Siamo',
-                href: 'about'
+                routeName: 'about'
             }
           ]
         }
