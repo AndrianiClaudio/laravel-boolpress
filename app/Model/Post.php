@@ -17,7 +17,7 @@ class Post extends Model
         'updated_at'
     ];
 
-    
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -26,7 +26,8 @@ class Post extends Model
     {
         return $this->belongsTo('App\Model\Category');
     }
-    public function tag() {
+    public function tag()
+    {
         return $this->belongsToMany('App\Model\Tag');
     }
 
@@ -38,11 +39,13 @@ class Post extends Model
     public static function createSlug($title, $model)
     {
         $slug = Str::slug($title, '-');
-        if($model === 'category') {
+        if ($model === 'category') {
             $oldPost = Category::where('slug', $slug)->first();
-        } else if ($model === 'tag') {
+        }
+        else if ($model === 'tag') {
             $oldPost = Tag::where('slug', $slug)->first();
-        } else {
+        }
+        else {
             // default: post
             $oldPost = Post::where('slug', $slug)->first();
         }
@@ -51,15 +54,17 @@ class Post extends Model
         while ($oldPost) {
             $newSlug = $slug . '-' . $counter;
             // $oldPost = Post::where('slug', $newSlug)->first();
-            if($model === 'category') {
+            if ($model === 'category') {
                 $oldPost = Category::where('slug', $newSlug)->first();
-            } else if ($model === 'tag') {
+            }
+            else if ($model === 'tag') {
                 $oldPost = Tag::where('slug', $newSlug)->first();
-            } else {
+            }
+            else {
                 // default: post
                 $oldPost = Post::where('slug', $newSlug)->first();
             }
-            
+
             $counter++;
         }
 

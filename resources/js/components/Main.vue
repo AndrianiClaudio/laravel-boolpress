@@ -72,11 +72,11 @@ export default {
     getPosts(url) {
       axios.get(url)
       .then((res) => {
-        this.posts = res.data.results.posts.data;
+        this.posts = res.data.results;
         // console.log(this.posts);
-        this.next_page_url = res.data.results.posts.next_page_url;
-        this.prev_page_url = res.data.results.posts.prev_page_url;
-        // console.log(res.data.results.posts.next_page_url);
+        this.next_page_url = res.data.results.next_page_url;
+        this.prev_page_url = res.data.results.prev_page_url;
+        console.log(this.posts,this.next_page_url,this.prev_page_url);
       });
     },
     setPage(url) { 
@@ -86,7 +86,7 @@ export default {
     }
   },
   created() {
-    this.getPosts('http://127.0.0.1:8000/api/posts');
+    this.getPosts('http://127.0.0.1:8000/api/v1/posts');
   }
 }
 </script>
