@@ -1,14 +1,7 @@
 <template>
-  <div>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h1>Home</h1>
-          </div>
-        </div>
-        <Main :posts="posts"></Main>
-      </div>
-  </div>
+  <!-- <div> -->
+    <Main :cards="cards" @changePage="changePage($event)"></Main>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -21,7 +14,11 @@ import Main from '../components/Main.vue';
     },
     data() {
       return {
-        posts: null,
+        cards: {
+          posts: null,
+          next_page_url: null,
+          prev_page_url: null
+        }
       }
     },
     created() {
@@ -31,8 +28,14 @@ import Main from '../components/Main.vue';
       getPosts(url){
           axios.get(url).then(
             (result) => {
-              this.posts = result.data.results.data;
+              this.cards.posts = result.data.results.data;
             });
+      },
+      // funzione per cambiare pagina 
+      changePage(url) { 
+        if(this[url]) {
+          this.getPosts(this[url]);
+        }
       }
       
     }
