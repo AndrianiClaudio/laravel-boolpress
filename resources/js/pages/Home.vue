@@ -21,6 +21,7 @@ import Main from '../components/Main.vue';
       return {
         cards: {
           posts: null,
+          // count: 0,
           next_page_url: null,
           prev_page_url: null
         }
@@ -37,6 +38,7 @@ import Main from '../components/Main.vue';
           axios.get(url).then(
             (result) => {
               this.cards.posts = result.data.results.data;
+              // this.cards.count = res.data.results.count;
             });
       },
       // funzione per cambiare pagina 

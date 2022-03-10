@@ -98,10 +98,11 @@ class PostController extends Controller
         $posts = $posts->with(['tag', 'category', 'user'])->get();
         // dd($posts);
         return response()->json([
+            // ($posts->count() === 0) ? $posts : null
             'response' => true,
             'count' => $posts->count(),
             'results' => [
-                'data' => $posts
+                'data' => ($posts->count() === 0) ? $posts : null,
             ],
         ]);
     }

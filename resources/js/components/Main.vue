@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid">
   <!-- CARDS  -->
-  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 " v-if="cards && cards.posts.length > 0">
+  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 " v-if="cards.posts">
     <!-- POSTS -->
     <div class="col p-2" v-for="post in cards.posts" :key="post.id">
       <div class="card h-100">

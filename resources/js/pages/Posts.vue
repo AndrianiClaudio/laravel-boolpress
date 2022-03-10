@@ -55,6 +55,7 @@ export default {
     return {
       cards: {
         posts: [],
+        // count: 0,
         next_page_url: null,
         prev_page_url: null,
       },
@@ -77,6 +78,7 @@ export default {
       .then((res) => {
               // console.log(res);
               this.cards.posts = res.data.results.data;
+              // this.cards.count = res.data.results.count;
               this.cards.next_page_url = res.data.results.next_page_url;
               this.cards.prev_page_url = res.data.results.prev_page_url;
           });
@@ -93,6 +95,7 @@ export default {
       axios.get(url)
       .then((res) => {
         this.cards.posts = res.data.results.data;
+        this.cards.count = res.data.results.count;
         this.cards.next_page_url = res.data.results.next_page_url;
         this.cards.prev_page_url = res.data.results.prev_page_url;
         // console.log(res.data.results.data);
