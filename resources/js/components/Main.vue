@@ -1,7 +1,7 @@
 <template>
-<div class="container-fluid" :key="cards.key">
+<div class="container-fluid">
   <!-- CARDS  -->
-  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 " v-if="cards">
+  <div class="row px-3 g-0 row-cols-1 row-cols-md-2 " v-if="cards && cards.posts.length > 0">
     <!-- POSTS -->
     <div class="col p-2" v-for="post in cards.posts" :key="post.id">
       <div class="card h-100">
@@ -31,6 +31,12 @@
       </div>
     </div>
   </div>
+  <!-- NO CARD -->
+  <div class="row" v-else>
+    <div class="col text-center">
+      <h3>Non sono presenti post da visualizzare.</h3>
+    </div>
+  </div>
   <!-- NEXT & PREV PAGES  -->
   <div v-if="cards.next_page_url || cards.prev_page_url" class="col-12 text-center">
   <div class="btn-group mt-4" role="group">
@@ -55,7 +61,7 @@
       changePage(url) { 
         this.$emit('changePage',url)
       }
-    }
+    },
   }
 </script>
 
