@@ -76,7 +76,7 @@ export default {
         // console.log(this.posts);
         this.next_page_url = res.data.results.next_page_url;
         this.prev_page_url = res.data.results.prev_page_url;
-        console.log(this.posts,this.next_page_url,this.prev_page_url);
+        // console.log(this.posts,this.next_page_url,this.prev_page_url);
       });
     },
     setPage(url) { 
