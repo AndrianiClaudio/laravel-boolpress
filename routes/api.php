@@ -16,4 +16,6 @@ Route::get("v1/posts/filter", 'Api\PostController@filter');
 
 Route::get("v1/tags", 'Api\TagController@index');
 
+Route::get("v1/categories", 'Api\CategoryController@index');
+
 Route::get("v1/posts/{id}", 'Api\PostController@show');

@@ -74,26 +74,23 @@ class PostController extends Controller
     public function filter(Request $request)
     {
         $data = $request->all();
-
-
+        // dd($data);
         //apriamo una chiamata eloquent senza chiuderla
         $posts = Post::where('id', '>=', 1);
 
-        // //se abbiamo orderbycolumn e orderbysort in $data
-        // //li usiamo per ordinare
-        // if (
-        // array_key_exists('orderbycolumn', $data) &&
-        // array_key_exists('orderbysort', $data)
-        // ) {
-        //     $posts->orderBy($data['orderbycolumn'], $data['orderbysort']);
-        // }
-
+        if (array_key_exists('category',$data)) {
+            // dd($data['category']);
+            $category = $data['category'];
+            $posts->whereHas('category', function (Builder $query) use ($category) {
+                $query->where('name',$category);
+                // dd($query)
+            });
+        }
         if (array_key_exists('tags', $data)) {
             foreach ($data['tags'] as $tag) {
-                // dd($data['tags']);
-                //fa una join per controllare i tag che sono associati al post
+                //fa una join per controllare le category che sono associati al post
                 $posts->whereHas('tag', function (Builder $query) use ($tag) {
-                    $query->where('name', '=', $tag);
+                    $query->where('name' , $tag);
                 });
             }
         }

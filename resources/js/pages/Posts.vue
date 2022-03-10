@@ -24,11 +24,23 @@
               </select>
             </div>
           </div> -->
+          <!-- SELECT CATEGORY-->
+          <div class="row">
+            <div class="col  mb-3 text-center">
+              <label for="category">
+                Category
+                <select class="form-select" name="category" v-model="selected.category">
+                  <option value="all">All</option>
+                  <option v-for="(category,index) in categories" :key="`category-${index}`" :value="category.name">{{category.name}}</option>
+                </select>
+              </label>
+            </div>
+          </div>
           <!-- SELECT TAGS -->
           <div class="row">
             <div class="mb-3 col-12 ">
               <fieldset>
-                <legend>Tags</legend>
+                <legend class="text-center">Tags</legend>
                 <ul class="list-group-horizontal d-flex align-items-center flex-wrap">
                   <li class="list-group-item " v-for="(tag, index) in tags" :key="`tag-${index}`" >
                       <input class="me-2" type="checkbox" name="tags[]" :value="tag.name" v-model="selected.tags">
@@ -69,8 +81,10 @@ export default {
       },
       selected: {
         tags:[],
+        category: 'all',
       },
       tags: [],
+      categories: [],
     }
   },
   methods: {
@@ -110,6 +124,12 @@ export default {
       .then((res) => {
         this.tags = res.data.results.data;
       });
+    },
+    getCategories() {
+      axios.get('http://127.0.0.1:8000/api/v1/categories')
+      .then((res) => {
+        this.categories = res.data.results.data;
+      });
     }
 
   },
@@ -117,6 +137,7 @@ export default {
     // otteni post
     this.getPosts('http://127.0.0.1:8000/api/v1/posts');
     this.getTags();
+    this.getCategories();
     // console.log(this.tags);
   }
 }
