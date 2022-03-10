@@ -14,17 +14,17 @@ class PostTagSeeder extends Seeder
     public function run()
     {
         $posts = Post::all();
-        
+
         foreach ($posts as $post) {
             // contatori
             $cont = 0;
             $contMax = 2;
             // associa tag
-            while($cont < $contMax) {
+            while ($cont < $contMax) {
                 $randomBool = rand(0, 3);
-                if($randomBool === 0) {
+                if ($randomBool === 0) {
                     $tagId = Tag::inRandomOrder()->first()->id;
-                    $post->tag()->attach($tagId);
+                    $post->tag()->sync($tagId);
                 }
                 $cont++;
             }

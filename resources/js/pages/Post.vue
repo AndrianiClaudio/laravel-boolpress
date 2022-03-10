@@ -35,7 +35,7 @@
           <!-- TAGS -->
           <div v-if="post.tag.length > 0" class="row py-2">
             <div class="container">
-              <span v-for="tag in post.tag" :key="`${tag}`" class="badge fs-6 rounded-pill bg-secondary me-3">#{{tag.name}}</span>
+              <span v-for="(tag,index) in post.tag" :key="`tag-${index}`" class="badge fs-6 rounded-pill bg-secondary me-3">#{{tag.name}}</span>
             </div>
           </div>
         </div>

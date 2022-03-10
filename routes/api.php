@@ -12,6 +12,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get("v1/posts", 'Api\PostController@index');
 Route::get("v1/posts/random", 'Api\PostController@inRandomOrder');
+Route::get("v1/posts/search", 'Api\PostController@filter');
 
+Route::get("v1/tags", 'Api\TagController@index');
 
 Route::get("v1/posts/{id}", 'Api\PostController@show');
