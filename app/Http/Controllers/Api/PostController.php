@@ -91,15 +91,15 @@ class PostController extends Controller
         if (array_key_exists('tags', $data)) {
             foreach ($data['tags'] as $tag) {
                 // dd($data['tags']);
-                //fa una join per controllare i tag che sono associati al product
-                $posts->whereHas('tags', function (Builder $query) use ($tag) {
-                    $query->where('name', $tag);
+                //fa una join per controllare i tag che sono associati al post
+                $posts->whereHas('tag', function (Builder $query) use ($tag) {
+                    $query->where('name', '=', $tag);
                 });
             }
         }
 
         $posts = $posts->with(['tag', 'category', 'user'])->get();
-
+        // dd($posts);
         return response()->json([
             'response' => true,
             'count' => $posts->count(),

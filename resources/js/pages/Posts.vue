@@ -74,16 +74,13 @@ export default {
   },
   methods: {
     filterPosts () {
-      console.log('search', this.selected);
-      const url = 'http://127.0.0.1:8001/api/v1/posts/filter';
-      axios.get(url, {
-          params: this.selected
-      }).then(
-          (result) => {
-              // console.log(result);
-              this.cards.posts = result.data.results.data;
-              this.cards.next_page_url = result.data.results.next_page_url;
-              this.cards.prev_page_url = result.data.results.prev_page_url;
+      // console.log('search', this.selected);
+      axios.get('http://127.0.0.1:8000/api/v1/posts/filter', {params: this.selected})
+      .then((res) => {
+              // console.log(res);
+              this.cards.posts = res.data.results.data;
+              this.cards.next_page_url = res.data.results.next_page_url;
+              this.cards.prev_page_url = res.data.results.prev_page_url;
           });
     },
     changePage(vs) {
@@ -100,7 +97,7 @@ export default {
         this.cards.posts = res.data.results.data;
         this.cards.next_page_url = res.data.results.next_page_url;
         this.cards.prev_page_url = res.data.results.prev_page_url;
-        console.log(res.data.results.data);
+        // console.log(res.data.results.data);
       });
     },
     getTags() {
@@ -115,7 +112,7 @@ export default {
     // otteni post
     this.getPosts('http://127.0.0.1:8000/api/v1/posts');
     this.getTags();
-    console.log(this.tags);
+    // console.log(this.tags);
   }
 }
 </script>
