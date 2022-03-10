@@ -2,6 +2,7 @@
 <div class="container-fluid" :key="cards.key">
   <!-- CARDS  -->
   <div class="row px-3 g-0 row-cols-1 row-cols-md-2 " v-if="cards">
+    <!-- POSTS -->
     <div class="col p-2" v-for="post in cards.posts" :key="post.id">
       <div class="card h-100">
         <img v-if="post.image" :src="'/storage/'+post.image" class="card-img-top" :alt="post.title">

@@ -18,16 +18,19 @@ class PostTagSeeder extends Seeder
         foreach ($posts as $post) {
             // contatori
             $cont = 0;
-            $contMax = 2;
+            $contMax = 5;
             // associa tag
+
+            $tags = [];
             while ($cont < $contMax) {
-                $randomBool = rand(0, 3);
+                $randomBool = rand(0, 2);
                 if ($randomBool === 0) {
                     $tagId = Tag::inRandomOrder()->first()->id;
-                    $post->tag()->sync($tagId);
+                    $tags[] = $tagId;
                 }
                 $cont++;
             }
+            $post->tag()->sync($tags);
         }
     }
 }

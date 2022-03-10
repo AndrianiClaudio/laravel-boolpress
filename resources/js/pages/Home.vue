@@ -1,6 +1,11 @@
 <template>
   <!-- <div> -->
-    <Main :cards="cards" @changePage="changePage($event)"></Main>
+    <div class="row">
+      <div class="col text-center">
+        <input class="btn btn-success border-pill" type="button" value="Load other random posts" @click.prevent="randomPosts">
+        <Main :cards="cards" @changePage="changePage($event)"></Main>
+      </div>
+    </div>
   <!-- </div> -->
 </template>
 
@@ -25,6 +30,9 @@ import Main from '../components/Main.vue';
       this.getPosts('http://127.0.0.1:8000/api/v1/posts/random');
     },
     methods: {
+      randomPosts () {
+        this.getPosts('http://127.0.0.1:8000/api/v1/posts/random');
+      },
       getPosts(url){
           axios.get(url).then(
             (result) => {

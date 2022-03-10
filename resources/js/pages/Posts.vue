@@ -40,8 +40,9 @@
           </div>
           <!-- FILTER ELEMENTS -->
           <div class="row">
-            <div class="col-2">
+            <div class="col text-center">
               <input class="btn btn-info" type="button" value="filtra" @click.prevent="filterPosts">
+              <input class="btn btn-warning" type="button" value="reset" @click.prevent="resetSelected">
             </div>
           </div>
       </form>
@@ -73,6 +74,10 @@ export default {
     }
   },
   methods: {
+    resetSelected () {
+      this.selected.tags = [];
+      this.getPosts('http://127.0.0.1:8000/api/v1/posts');
+    },
     filterPosts () {
       // console.log('search', this.selected);
       axios.get('http://127.0.0.1:8000/api/v1/posts/filter', {params: this.selected})
