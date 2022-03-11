@@ -61,14 +61,13 @@ export default {
       formData.append('firstname', this.form.firstname);
       formData.append('lastname', this.form.lastname);
       formData.append('message', this.form.message);
-
       
       const headers = { 
         'Content-Type': 'multipart/form-data', 
-        'Authorization': 'Bearer n686yd9qnm9b56h' 
+        'Authorization': 'Bearer jhgf678iklp987t' 
       };
-      console.log(headers);
-      const url = "http://127.0.0.1:8000/api/v1/contacts/";
+      // console.log(headers);
+      const url = "http://127.0.0.1:8000/api/v1/contacts";
       
       axios.post(url, formData, { headers })
         .then((result) => {

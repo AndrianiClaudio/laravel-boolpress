@@ -15,7 +15,7 @@ class ApiAuth
      */
     public function handle($request, Closure $next)
     {
-        dd($request->all());
+        // dd($request->all());
         if ($request->header('Authorization') != 'Bearer ' . config('app.apiKey')) {
             return response()->json([
                 "success" => false,
