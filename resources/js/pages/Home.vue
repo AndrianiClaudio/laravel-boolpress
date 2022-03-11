@@ -1,11 +1,9 @@
 <template>
   <!-- <div> -->
-    <div class="row">
-      <div class="col text-center">
-        <input class="btn btn-success border-pill" type="button" value="Load other random posts" @click.prevent="randomPosts">
-        <Main :cards="cards" @changePage="changePage($event)"></Main>
-      </div>
-    </div>
+  <main>
+      <input class="btn btn-success border-pill d-block mx-auto" type="button" value="Load other random posts" @click.prevent="randomPosts">
+      <Main :cards="cards" @changePage="changePage($event)"></Main>
+  </main>
   <!-- </div> -->
 </template>
 

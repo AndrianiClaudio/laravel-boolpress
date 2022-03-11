@@ -5,7 +5,7 @@
       <form>
           <!-- SELECT CATEGORY-->
           <div class="row">
-            <div class="col  mb-3 text-center">
+            <div class="col mb-3 text-center">
               <label for="category">
                 Category
                 <select class="form-select" name="category" v-model="selected.category">
