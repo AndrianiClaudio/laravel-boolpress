@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid">
+<div class="container-fluid py-4">
   <!-- CARDS  -->
   <div class="row px-3 g-0 row-cols-1 row-cols-md-2 " v-if="cards.posts">
     <!-- POSTS -->

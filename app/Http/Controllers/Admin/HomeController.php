@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         // controllo se utente é loggato
+        // dd(Auth::user()->get());
         if (Auth::check() && Auth::user()->roles()->get()->first()->name === 'admin') {
             return view('admin.home');
         }

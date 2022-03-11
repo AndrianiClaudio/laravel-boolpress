@@ -1,16 +1,15 @@
 <template>
-<header class="header">
-
+<!-- <header class="header"> -->
   <div class="row">
-    <div class="col d-flex justify-content-center">
-      <ul class="list-inline">
-        <li v-for="(item,index) in menu.items" :key="`item-${index}`" class="list-inline-item">
-          <router-link class="nav-link text-dark text-uppercase" :to="{ name: item.routeName}">{{ item.name }}</router-link>
+    <div class="col">
+      <ul class="navbar navbar-nav-inline justify-content-center navbar-light bg-primary shadow-sm">
+        <li v-for="(item,index) in menu.items" :key="`item-${index}`" class="list-inline-item p-2">
+          <router-link class="nav-item text-light text-decoration-none text-uppercase" :to="{ name: item.routeName}">{{ item.name }}</router-link>
         </li>
       </ul>
     </div>
   </div>
-</header>
+<!-- </header> -->
 
 </template>
 

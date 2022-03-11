@@ -79,12 +79,13 @@ class PostController extends Controller
         $posts = Post::where('id', '>=', 1);
 
         if (array_key_exists('category',$data)) {
-            // dd($data['category']);
-            $category = $data['category'];
-            $posts->whereHas('category', function (Builder $query) use ($category) {
-                $query->where('name',$category);
-                // dd($query)
-            });
+            if($data['category'] !== 'all') {
+                $category = $data['category'];
+                $posts->whereHas('category', function (Builder $query) use ($category) {
+                    $query->where('name',$category);
+                    // dd($query)
+               });
+            }
         }
         if (array_key_exists('tags', $data)) {
             foreach ($data['tags'] as $tag) {
@@ -102,7 +103,7 @@ class PostController extends Controller
             'response' => true,
             'count' => $posts->count(),
             'results' => [
-                'data' => ($posts->count() === 0) ? $posts : null,
+                'data' => ($posts->count() === 0) ? null : $posts,
             ],
         ]);
     }
