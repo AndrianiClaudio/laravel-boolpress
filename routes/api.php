@@ -20,3 +20,6 @@ Route::get("v1/categories", 'Api\CategoryController@index');
 Route::get("v1/categories/{id}", 'Api\CategoryController@show');
 
 Route::get("v1/posts/{id}", 'Api\PostController@show');
+
+Route::post('v1/contacts/', 'Api\ContactController@sendMessage');
+// ->middleware('api.auth');

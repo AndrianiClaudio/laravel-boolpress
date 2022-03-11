@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-
+    'apiKey' => env('API_KEY', 'jhy65rfghjuio'),
     'name' => env('APP_NAME', 'Boolpress'),
 
     /*
