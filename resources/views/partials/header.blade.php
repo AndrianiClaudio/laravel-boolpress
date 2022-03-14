@@ -1,3 +1,7 @@
+<div class="container-fluid bg-primary w-100 d-flex justify-content-between"><ul class="navbar navbar-nav-inline mb-0 justify-content-center navbar-light shadow-sm"><li class="list-inline-item p-2"><a href="http://127.0.0.1:8000/login" class="nav-item text-light text-decoration-none text-uppercase">Login</a></li> <li class="list-inline-item p-2"><a href="http://127.0.0.1:8000/register" class="nav-item text-light text-decoration-none text-uppercase">Register</a></li></ul> <ul class="navbar navbar-nav-inline mb-0 justify-content-center navbar-light shadow-sm"><li class="list-inline-item p-2"><a href="/" aria-current="page" class="nav-item text-light text-decoration-none text-uppercase router-link-exact-active router-link-active">Home</a></li><li class="list-inline-item p-2"><a href="/posts" class="nav-item text-light text-decoration-none text-uppercase">Post</a></li><li class="list-inline-item p-2"><a href="/about" class="nav-item text-light text-decoration-none text-uppercase">Chi Siamo</a></li><li class="list-inline-item p-2"><a href="/contacts" class="nav-item text-light text-decoration-none text-uppercase">Contatti</a></li></ul></div>
+
+@php
+/*
 <nav class="navbar navbar-expand-md shadow-sm
 @guest navbar-light bg-light 
 @else navbar-dark bg-dark @endguest"
@@ -61,3 +65,5 @@ id="navbar-header">
 
     </div>
 </nav>
+*/
+@endphp

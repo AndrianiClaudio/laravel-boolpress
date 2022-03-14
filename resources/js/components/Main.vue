@@ -32,7 +32,7 @@
     </div>
   </div>
   <!-- NO CARD -->
-  <div class="row" v-else>
+  <div class="row g-0" v-else>
     <div class="col text-center">
       <h3>Non sono presenti post da visualizzare.</h3>
     </div>

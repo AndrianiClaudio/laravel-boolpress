@@ -23,17 +23,11 @@
 
 <body>
     <div id="app">
+        
         @yield('header')
-        {{-- <main class="py-4"> --}}
 
         @yield('content')
 
-                {{-- @include('partials.header')
-                
-                <main class="py-4">
-                </main> --}}
-        {{-- </main> --}}
-    </div>
 </body>
 
 </html>
