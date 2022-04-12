@@ -74,25 +74,28 @@ class PostController extends Controller
     public function filter(Request $request)
     {
         $data = $request->all();
-        // dd($data);
         //apriamo una chiamata eloquent senza chiuderla
         $posts = Post::where('id', '>=', 1);
 
-        if (array_key_exists('category',$data)) {
-            if($data['category'] !== 'all') {
+        if (array_key_exists('category', $data)) {
+            if ($data['category'] !== 'all') {
                 $category = $data['category'];
                 $posts->whereHas('category', function (Builder $query) use ($category) {
-                    $query->where('name',$category);
-                    // dd($query)
-               });
+                    $query->where('name', $category);
+                // dd($query)
+                });
             }
         }
-        if (array_key_exists('tags', $data)) {
-            foreach ($data['tags'] as $tag) {
-                //fa una join per controllare le category che sono associati al post
-                $posts->whereHas('tag', function (Builder $query) use ($tag) {
-                    $query->where('name' , $tag);
-                });
+        if (array_key_exists('tags', $data) && $data['tags']) {
+            // dd($data['tags']);
+            // dd(explode("-", $data['tags']));
+            if ($data['tags'] != '""') {
+                foreach (explode("-", $data['tags']) as $tag) {
+                    //fa una join per controllare le category che sono associati al post
+                    $posts->whereHas('tag', function (Builder $query) use ($tag) {
+                        $query->where('name', $tag);
+                    });
+                }
             }
         }
 
